@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class CreatingBeauty extends Game {
-	private SpriteBatch batch;
+	private SpriteBatch batch; //test
 
 	@Override
 	public void create () {
