@@ -6,26 +6,38 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import Screens.PlayScreen;
+
 public class CreatingBeauty extends Game {
-	private SpriteBatch batch; //test2
+	private static final int WORLD_WIDTH = 400;
+	private static final int WORLD_HEIGHT = 208;
+	private SpriteBatch batch;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		setScreen(new PlayScreen(this));
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		super.render();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+	}
+
+	//getters
+	public SpriteBatch getBatch() {
+		return batch;
+	}
+	public static int getWorldWidth() {
+		return WORLD_WIDTH;
+	}
+	public static int getWorldHeight() {
+		return WORLD_HEIGHT;
 	}
 
 	//setters
