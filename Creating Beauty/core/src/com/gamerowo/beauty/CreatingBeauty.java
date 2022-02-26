@@ -1,16 +1,15 @@
 package com.gamerowo.beauty;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
-import Screens.PlayScreen;
+import com.gamerowo.beauty.Screens.PlayScreen;
 
 public class CreatingBeauty extends Game {
 	private static final int WORLD_WIDTH = 400;
 	private static final int WORLD_HEIGHT = 208;
+	private static final float PPM = 100;
+
 	private SpriteBatch batch;
 
 	@Override
@@ -39,6 +38,7 @@ public class CreatingBeauty extends Game {
 	public static int getWorldHeight() {
 		return WORLD_HEIGHT;
 	}
+	public static float getPPM() { return PPM; }
 
 	//setters
 	public void setBatch(SpriteBatch batch) {
