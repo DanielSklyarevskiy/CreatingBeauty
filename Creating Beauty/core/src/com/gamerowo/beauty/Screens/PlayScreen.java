@@ -3,6 +3,7 @@ package com.gamerowo.beauty.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -25,9 +26,11 @@ import com.gamerowo.beauty.CreatingBeauty;
 
 import com.gamerowo.beauty.Scenes.Hud;
 
+import com.gamerowo.beauty.Sprites.Goomba;
 import com.gamerowo.beauty.Sprites.Player;
 
 import Tools.B2WorldCreator;
+import Tools.WorldContactListener;
 
 public class PlayScreen implements Screen {
     private CreatingBeauty game;
@@ -43,6 +46,9 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
     private Player player;
+    private Goomba goomba;
+
+    private Music music;
 
     public PlayScreen(CreatingBeauty game){
         atlas = new TextureAtlas("Mario_and_Enemies.pack");
@@ -59,9 +65,18 @@ public class PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(world, map);
+        new B2WorldCreator(this);
 
-        player = new Player(world, this);
+        player = new Player(this);
+
+        world.setContactListener(new WorldContactListener());
+
+        music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
+
+        goomba = new Goomba(this, 2f, .32f);
     }
 
     public TextureAtlas getAtlas(){
@@ -91,6 +106,8 @@ public class PlayScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(dt);
+        goomba.update(dt);
+        hud.update(dt);
 
         cam.position.x = player.getB2Body().getPosition().x;
 
@@ -113,6 +130,7 @@ public class PlayScreen implements Screen {
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
         player.draw(game.getBatch());
+        goomba.draw(game.getBatch());
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);
@@ -122,6 +140,13 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         port.update(width, height);
+    }
+
+    public TiledMap getMap(){
+        return map;
+    }
+    public World getWorld(){
+        return world;
     }
 
     @Override
