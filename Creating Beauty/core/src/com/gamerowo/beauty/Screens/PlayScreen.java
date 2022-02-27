@@ -26,6 +26,7 @@ import com.gamerowo.beauty.CreatingBeauty;
 
 import com.gamerowo.beauty.Scenes.Hud;
 
+import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.Goomba;
 import com.gamerowo.beauty.Sprites.Player;
 
@@ -39,14 +40,18 @@ public class PlayScreen implements Screen {
     private Viewport port;
     private Hud hud;
 
+    //tilemap
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
+    //box2d
     private World world;
     private Box2DDebugRenderer b2dr;
+    private B2WorldCreator creator;
+
+    //sprites
     private Player player;
-    private Goomba goomba;
 
     private Music music;
 
@@ -65,7 +70,7 @@ public class PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(this);
+        creator = new B2WorldCreator(this);
 
         player = new Player(this);
 
@@ -75,8 +80,6 @@ public class PlayScreen implements Screen {
         music.setLooping(true);
         music.setVolume(0.1f);
         music.play();
-
-        goomba = new Goomba(this, 2f, .32f);
     }
 
     public TextureAtlas getAtlas(){
@@ -106,7 +109,8 @@ public class PlayScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(dt);
-        goomba.update(dt);
+        for (Enemy enemy : creator.getGoombas())
+            enemy.update(dt);
         hud.update(dt);
 
         cam.position.x = player.getB2Body().getPosition().x;
@@ -130,7 +134,8 @@ public class PlayScreen implements Screen {
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
         player.draw(game.getBatch());
-        goomba.draw(game.getBatch());
+        for (Enemy enemy : creator.getGoombas())
+            enemy.draw(game.getBatch());
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);

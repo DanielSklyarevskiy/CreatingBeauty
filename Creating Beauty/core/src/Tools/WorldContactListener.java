@@ -42,6 +42,11 @@ public class WorldContactListener implements ContactListener {
                 break;
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.ENEMY_BIT:
                 Gdx.app.log("PLAYER", "DIED");
+                break;
+            case CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_BIT:
+                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
         }
     }
 
