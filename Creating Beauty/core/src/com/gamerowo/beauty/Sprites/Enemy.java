@@ -12,14 +12,23 @@ public abstract class Enemy extends Sprite {
     protected World world;
     protected PlayScreen screen;
     public Body b2Body;
+    public Vector2 velocity;
 
     public Enemy(PlayScreen screen, float x, float y){
         this.world = screen.getWorld();
         this.screen = screen;
         setPosition(x, y);
         defineEnemy();
+        velocity = new Vector2(1, 0);
     }
 
     protected abstract void defineEnemy();
     public abstract void hitOnHead();
+
+    public void reverseVelocity(boolean x, boolean y){
+        if(x)
+            velocity.x = -velocity.x;
+        if(y)
+            velocity.y = -velocity.y;
+    }
 }

@@ -1,5 +1,6 @@
 package Tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -26,12 +27,21 @@ public class WorldContactListener implements ContactListener {
             }
         }
 
-        switch (cDef){
+        switch (cDef) {
             case CreatingBeauty.ENEMY_HEAD_BIT | CreatingBeauty.PLAYER_BIT:
-                if(fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_HEAD_BIT)
-                    ((Enemy)fixA.getUserData()).hitOnHead();
-                if(fixB.getFilterData().categoryBits == CreatingBeauty.ENEMY_HEAD_BIT)
-                    ((Enemy)fixB.getUserData()).hitOnHead();
+                if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_HEAD_BIT)
+                    ((Enemy) fixA.getUserData()).hitOnHead();
+                else
+                    ((Enemy) fixB.getUserData()).hitOnHead();
+                break;
+            case CreatingBeauty.ENEMY_BIT | CreatingBeauty.OBJECT_BIT:
+                if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_BIT)
+                    ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                else
+                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.ENEMY_BIT:
+                Gdx.app.log("PLAYER", "DIED");
         }
     }
 
