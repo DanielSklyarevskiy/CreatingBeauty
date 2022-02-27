@@ -20,6 +20,7 @@ public abstract class Enemy extends Sprite {
         setPosition(x, y);
         defineEnemy();
         velocity = new Vector2(1, 0);
+        b2Body.setActive(false);
     }
 
     protected abstract void defineEnemy();
