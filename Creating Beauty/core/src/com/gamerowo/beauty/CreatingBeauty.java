@@ -13,6 +13,7 @@ public class CreatingBeauty extends Game {
 	private static final int WORLD_HEIGHT = 208;
 	private static final float PPM = 100;
 
+	public static final short NOTHING_BIT = 0;
 	public static final short GROUND_BIT = 1;
 	public static final short PLAYER_BIT = 2;
 	public static final short BRICK_BIT = 4;
@@ -34,6 +35,7 @@ public class CreatingBeauty extends Game {
 		manager.load("audio/sounds/coin.wav", Sound.class);
 		manager.load("audio/sounds/bump.wav", Sound.class);
 		manager.load("audio/sounds/breakblock.wav", Sound.class);
+		manager.load("audio/sounds/mariodie.wav", Sound.class);
 		manager.finishLoading();
 
 		setScreen(new PlayScreen(this));

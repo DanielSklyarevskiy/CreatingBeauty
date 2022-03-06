@@ -1,5 +1,7 @@
 package com.gamerowo.beauty.Sprites;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -8,23 +10,29 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.gamerowo.beauty.CreatingBeauty;
 import com.gamerowo.beauty.Screens.PlayScreen;
 
+import java.lang.management.ManagementFactory;
+
 public class Player extends Sprite {
-    public enum State {FALLING, JUMPING, STANDING, RUNNING};
+    public enum State {FALLING, JUMPING, STANDING, RUNNING, DEAD};
     public State currentState;
     public State previousState;
     private World world;
     private Body b2Body;
     private TextureRegion playerStand;
+    private TextureRegion playerDead;
     private Animation playerRun;
     private Animation playerJump;
     private float stateTimer;
     private boolean runningRight;
+    private boolean isDead;
 
     public Player(PlayScreen screen){
         super(screen.getAtlas().findRegion("little_mario"));
@@ -47,6 +55,8 @@ public class Player extends Sprite {
 
         playerStand = new TextureRegion(getTexture(), 0, 10, 16, 16);
 
+        playerDead = new TextureRegion(getTexture(), 96, 10, 16, 16);
+
         definePlayer();
         setBounds(0, 0, 16 / CreatingBeauty.getPPM(), 16 / CreatingBeauty.getPPM());
         setRegion(playerStand);
@@ -68,8 +78,9 @@ public class Player extends Sprite {
             case RUNNING:
                 region = (TextureRegion) playerRun.getKeyFrame(stateTimer, true);
                 break;
-            case FALLING:
-            case STANDING:
+            case DEAD:
+                region = playerDead;
+                break;
             default:
                 region = playerStand;
                 break;
@@ -90,7 +101,9 @@ public class Player extends Sprite {
     }
 
     public State getState(){
-        if(b2Body.getLinearVelocity().y > 0 || (b2Body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
+        if(isDead)
+            return State.DEAD;
+        else if(b2Body.getLinearVelocity().y > 0 || (b2Body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
             return State.JUMPING;
         else if(b2Body.getLinearVelocity().y < 0)
             return State.FALLING;
@@ -113,7 +126,7 @@ public class Player extends Sprite {
                                CreatingBeauty.OBJECT_BIT | CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_HEAD_BIT;
 
         fDef.shape = shape;
-        b2Body.createFixture(fDef);
+        b2Body.createFixture(fDef).setUserData(this);
 
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2 / CreatingBeauty.getPPM(), 6 / CreatingBeauty.getPPM()), new Vector2(2 / CreatingBeauty.getPPM(), 6 / CreatingBeauty.getPPM()));
@@ -121,6 +134,22 @@ public class Player extends Sprite {
         fDef.isSensor = true;
 
         b2Body.createFixture(fDef).setUserData("head");
+    }
+
+    public void hit(Enemy enemy){
+        if(enemy instanceof Koopa && ((Koopa)enemy).getCurrentState() == Koopa.State.STANDING_SHELL){
+            ((Koopa) enemy).kick(this.getX() <= enemy.getX() ? Koopa.KICK_RIGHT_SPEED : Koopa.KICK_LEFT_SPEED);
+        }
+        else {
+            CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class).stop();
+            CreatingBeauty.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
+            isDead = true;
+            Filter filter = new Filter();
+            filter.maskBits = CreatingBeauty.NOTHING_BIT;
+            for (Fixture fixture: b2Body.getFixtureList())
+                fixture.setFilterData(filter);
+            b2Body.applyLinearImpulse(new Vector2(0, 4f), b2Body.getWorldCenter(), true);
+        }
     }
 
     //getters & setters
@@ -138,5 +167,13 @@ public class Player extends Sprite {
 
     public void setB2Body(Body b2Body) {
         this.b2Body = b2Body;
+    }
+
+    public boolean isDead(){
+        return isDead;
+    }
+
+    public float getStateTimer(){
+        return stateTimer;
     }
 }

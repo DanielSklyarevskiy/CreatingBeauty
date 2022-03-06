@@ -27,11 +27,11 @@ public class Coin extends InteractiveTileObject{
     @Override
     public void onHeadHit() {
         Gdx.app.log("Coin", "Collision");
-        getCell().setTile(set.getTile(BLANK_COIN)); //change this later, but it's good for now
         if(getCell().getTile().getId() == BLANK_COIN)
             CreatingBeauty.manager.get("audio/sounds/bump.wav", Sound.class).play();
         else
             CreatingBeauty.manager.get("audio/sounds/coin.wav", Sound.class).play();
+        getCell().setTile(set.getTile(BLANK_COIN));
         Hud.addScore(100);
     }
 }

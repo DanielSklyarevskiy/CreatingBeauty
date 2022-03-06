@@ -87,7 +87,14 @@ public class Goomba extends Enemy{
     }
 
     @Override
-    public void hitOnHead() {
+    public void hitOnHead(Player player) {
         setToDestroy = true;
+    }
+
+    public void onEnemyHit(Enemy enemy){
+        if(enemy instanceof Koopa &&((Koopa) enemy).currentState == Koopa.State.MOVING_SHELL)
+           setToDestroy = true;
+        else
+            reverseVelocity(true, false);
     }
 }

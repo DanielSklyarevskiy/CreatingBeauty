@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.gamerowo.beauty.CreatingBeauty;
 import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.InteractiveTileObject;
+import com.gamerowo.beauty.Sprites.Player;
 
 public class WorldContactListener implements ContactListener {
     @Override
@@ -30,9 +31,9 @@ public class WorldContactListener implements ContactListener {
         switch (cDef) {
             case CreatingBeauty.ENEMY_HEAD_BIT | CreatingBeauty.PLAYER_BIT:
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_HEAD_BIT)
-                    ((Enemy) fixA.getUserData()).hitOnHead();
+                    ((Enemy) fixA.getUserData()).hitOnHead((Player) fixB.getUserData());
                 else
-                    ((Enemy) fixB.getUserData()).hitOnHead();
+                    ((Enemy) fixB.getUserData()).hitOnHead((Player) fixA.getUserData());
                 break;
             case CreatingBeauty.ENEMY_BIT | CreatingBeauty.OBJECT_BIT:
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_BIT)
@@ -41,11 +42,14 @@ public class WorldContactListener implements ContactListener {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.ENEMY_BIT:
-                Gdx.app.log("PLAYER", "DIED");
+                if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT)
+                    ((Player) fixA.getUserData()).hit((Enemy) fixB.getUserData());
+                else
+                    ((Player) fixB.getUserData()).hit((Enemy) fixA.getUserData());
                 break;
             case CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_BIT:
-                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
-                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixA.getUserData()).onEnemyHit((Enemy) fixB.getUserData());
+                ((Enemy) fixB.getUserData()).onEnemyHit((Enemy) fixA.getUserData());
                 break;
         }
     }

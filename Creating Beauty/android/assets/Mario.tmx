@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="27">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="53">
  <tileset firstgid="1" source="tileset_gutter.tsx"/>
  <layer id="1" name="background" width="240" height="13">
   <data encoding="base64" compression="zlib">
@@ -8,17 +8,25 @@
  </layer>
  <layer id="2" name="graphics" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt0zEKwDAMA0CbTu1T2v//Lx2zpODBUMIdaJJWRQAAAAAAAACwm2MKsBf/hn85M+LKelfZAD3u93vP4n9fXWUD9MimAP0G7pkBbQ==
+   eJzt0zESQDAQBdBkVByFo3AU7t9KqSEjURDvzWy1u7/aDQEAAAAAAACA1nSHAtriv+Fd+hjCEO/3cjM1uyXmlLM8lAVfMaabn07u/qqXm6nZLbGmnM3/8jOxsYI/2QHjmgPX
   </data>
  </layer>
  <objectgroup id="3" name="ground">
   <object id="1" x="0" y="192" width="336" height="16"/>
   <object id="2" x="0" y="192" width="352" height="16"/>
+  <object id="34" x="368" y="192" width="144"/>
+  <object id="37" x="400" y="208" width="128"/>
+  <object id="38" x="416.667" y="209.333" height="0.666667"/>
+  <object id="42" x="352" y="192" width="176" height="16"/>
+  <object id="45" x="528" y="192" width="304" height="16"/>
  </objectgroup>
  <objectgroup id="4" name="pipes">
   <object id="5" x="256" y="160" width="32" height="32"/>
   <object id="8" x="112" y="160" width="32" height="32"/>
   <object id="9" x="0" y="160" width="32" height="32"/>
+  <object id="32" x="496" y="160" width="32" height="32"/>
+  <object id="33" x="352" y="160" width="32" height="32"/>
+  <object id="47" x="800" y="160" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="5" name="coins">
   <object id="19" x="192" y="144" width="16" height="16"/>
@@ -34,5 +42,13 @@
   <object id="24" x="48" y="176" width="16" height="16"/>
   <object id="25" x="176" y="176" width="16" height="16"/>
   <object id="26" x="224" y="176" width="16" height="16"/>
+  <object id="30" x="448" y="176" width="16" height="16"/>
+  <object id="49" x="592" y="176" width="16"/>
+  <object id="52" x="624" y="176" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="9" name="koopas">
+  <object id="28" x="416" y="176" width="16" height="16"/>
+  <object id="29" x="480" y="176" width="16" height="16"/>
+  <object id="48" x="688" y="176" width="16" height="16"/>
  </objectgroup>
 </map>

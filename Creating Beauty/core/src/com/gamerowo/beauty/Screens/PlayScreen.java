@@ -92,15 +92,17 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput(float dt){
-       if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-           player.getB2Body().applyLinearImpulse(new Vector2(0, 4f), player.getB2Body().getWorldCenter(), true);
-       }
-       if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.getB2Body().getLinearVelocity().x <= 2){
-           player.getB2Body().applyLinearImpulse(new Vector2(0.1f, 0), player.getB2Body().getWorldCenter(), true);
-       }
-       if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.getB2Body().getLinearVelocity().x >= -2){
-           player.getB2Body().applyLinearImpulse(new Vector2(-0.1f, 0), player.getB2Body().getWorldCenter(), true);
-       }
+        if(player.currentState != Player.State.DEAD){
+            if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+                player.getB2Body().applyLinearImpulse(new Vector2(0, 4f), player.getB2Body().getWorldCenter(), true);
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.getB2Body().getLinearVelocity().x <= 2){
+                player.getB2Body().applyLinearImpulse(new Vector2(0.1f, 0), player.getB2Body().getWorldCenter(), true);
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.getB2Body().getLinearVelocity().x >= -2){
+                player.getB2Body().applyLinearImpulse(new Vector2(-0.1f, 0), player.getB2Body().getWorldCenter(), true);
+            }
+        }
     }
     public void update(float dt){
 
@@ -109,14 +111,16 @@ public class PlayScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(dt);
-        for (Enemy enemy : creator.getGoombas()) {
+        for (Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
             if(enemy.getX() < player.getX() + 224 / CreatingBeauty.getPPM())
                 enemy.b2Body.setActive(true);
         }
         hud.update(dt);
 
-        cam.position.x = player.getB2Body().getPosition().x;
+        if(player.currentState != Player.State.DEAD){
+            cam.position.x = player.getB2Body().getPosition().x;
+        }
 
         cam.update();
 
@@ -137,12 +141,24 @@ public class PlayScreen implements Screen {
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
         player.draw(game.getBatch());
-        for (Enemy enemy : creator.getGoombas())
+        for (Enemy enemy : creator.getEnemies())
             enemy.draw(game.getBatch());
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);
         hud.getStage().draw();
+
+        if(gameOver()){
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+    }
+
+    public boolean gameOver(){
+        if(player.currentState == Player.State.DEAD && player.getStateTimer() > 3){
+            return true;
+        }
+        return false;
     }
 
     @Override

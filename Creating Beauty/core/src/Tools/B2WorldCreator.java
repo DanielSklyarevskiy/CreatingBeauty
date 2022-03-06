@@ -14,10 +14,13 @@ import com.gamerowo.beauty.CreatingBeauty;
 import com.gamerowo.beauty.Screens.PlayScreen;
 import com.gamerowo.beauty.Sprites.Brick;
 import com.gamerowo.beauty.Sprites.Coin;
+import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.Goomba;
+import com.gamerowo.beauty.Sprites.Koopa;
 
 public class B2WorldCreator {
     private Array<Goomba> goombas;
+    private Array<Koopa> koopas;
 
     public B2WorldCreator(PlayScreen screen) {
         World world = screen.getWorld();
@@ -71,9 +74,18 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             goombas.add(new Goomba(screen, rect.getX() / CreatingBeauty.getPPM(), rect.getY() / CreatingBeauty.getPPM()));
         }
+        //koopas
+        koopas = new Array<Koopa>();
+        for(MapObject object: map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            koopas.add(new Koopa(screen, rect.getX() / CreatingBeauty.getPPM(), rect.getY() / CreatingBeauty.getPPM()));
+        }
     }
 
-    public Array<Goomba> getGoombas() {
-        return goombas;
+    public Array<Enemy> getEnemies(){
+        Array<Enemy> enemies = new Array<Enemy>();
+        enemies.addAll(goombas);
+        enemies.addAll(koopas);
+        return enemies;
     }
 }
