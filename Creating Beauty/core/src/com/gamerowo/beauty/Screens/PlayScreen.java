@@ -93,8 +93,9 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt){
         if(player.currentState != Player.State.DEAD){
-            if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+            if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getJumpsRemaining() > 0){
                 player.getB2Body().applyLinearImpulse(new Vector2(0, 4f), player.getB2Body().getWorldCenter(), true);
+                player.setJumpsRemaining(player.getJumpsRemaining() - 1);
             }
             if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.getB2Body().getLinearVelocity().x <= 2){
                 player.getB2Body().applyLinearImpulse(new Vector2(0.1f, 0), player.getB2Body().getWorldCenter(), true);

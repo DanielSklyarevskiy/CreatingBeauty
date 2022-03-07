@@ -30,6 +30,7 @@ public class Player extends Sprite {
     private TextureRegion playerDead;
     private Animation playerRun;
     private Animation playerJump;
+    private int jumpsRemaining;
     private float stateTimer;
     private boolean runningRight;
     private boolean isDead;
@@ -41,6 +42,7 @@ public class Player extends Sprite {
         previousState = State.STANDING;
         stateTimer = 0;
         runningRight = true;
+        jumpsRemaining = 1;
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for (int i = 1; i < 4; i++)
@@ -175,5 +177,13 @@ public class Player extends Sprite {
 
     public float getStateTimer(){
         return stateTimer;
+    }
+
+    public int getJumpsRemaining() {
+        return jumpsRemaining;
+    }
+
+    public void setJumpsRemaining(int jumpsRemaining) {
+        this.jumpsRemaining = jumpsRemaining;
     }
 }
