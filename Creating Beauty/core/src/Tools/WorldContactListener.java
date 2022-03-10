@@ -33,7 +33,7 @@ public class WorldContactListener implements ContactListener {
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_HEAD_BIT)
                     ((Enemy) fixA.getUserData()).hitOnHead((Player) fixB.getUserData());
                 else
-                    ((Enemy) fixB.getUserData()).hitOnHead((Player) fixA.getUserData());
+                    ((Enemy) fixB.getUserData()).hitOnHead((Player) fixA.getUserData()); //creashes when dashing into koopa shell
                 break;
             case CreatingBeauty.ENEMY_BIT | CreatingBeauty.OBJECT_BIT:
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_BIT)

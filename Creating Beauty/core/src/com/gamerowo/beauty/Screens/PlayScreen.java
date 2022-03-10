@@ -93,7 +93,7 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt){
         if(player.currentState != Player.State.DEAD){
-            if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getJumpsRemaining() > 0){
+            if(Gdx.input.isKeyJustPressed(Input.Keys.Z) && player.getJumpsRemaining() > 0){
                 player.getB2Body().applyLinearImpulse(new Vector2(0, 4f), player.getB2Body().getWorldCenter(), true);
                 player.setJumpsRemaining(player.getJumpsRemaining() - 1);
             }
@@ -102,6 +102,32 @@ public class PlayScreen implements Screen {
             }
             if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.getB2Body().getLinearVelocity().x >= -2){
                 player.getB2Body().applyLinearImpulse(new Vector2(-0.1f, 0), player.getB2Body().getWorldCenter(), true);
+            }
+            //
+            if (Gdx.input.isKeyJustPressed(Input.Keys.X) && Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)){
+                player.getB2Body().setLinearVelocity(new Vector2(player.getDashSpeed() * 2.5f, player.getDashSpeed() * 2.5f));
+            }
+            else if (Gdx.input.isKeyJustPressed(Input.Keys.X) && Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)){
+                player.getB2Body().setLinearVelocity(new Vector2(-player.getDashSpeed() * 2.5f, player.getDashSpeed() * 2.5f));
+            }
+            else if (Gdx.input.isKeyJustPressed(Input.Keys.X) && Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+                player.getB2Body().setLinearVelocity(new Vector2(player.getDashSpeed() * 2f, -player.getDashSpeed() * 2f));
+            }
+            else if (Gdx.input.isKeyJustPressed(Input.Keys.X) && Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+                player.getB2Body().setLinearVelocity(new Vector2(-player.getDashSpeed() * 2f, -player.getDashSpeed() * 2f));
+            }
+
+            else if (Gdx.input.isKeyJustPressed(Input.Keys.X) && Gdx.input.isKeyPressed(Input.Keys.UP)){
+                player.getB2Body().setLinearVelocity(new Vector2(0, player.getDashSpeed() * 3));
+            }
+            else if (Gdx.input.isKeyJustPressed(Input.Keys.X) && Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+                player.getB2Body().applyLinearImpulse(new Vector2(0, -player.getDashSpeed() * 1.5f), player.getB2Body().getWorldCenter(), true);
+            }
+            else if (Gdx.input.isKeyJustPressed(Input.Keys.X) && Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+                player.getB2Body().applyLinearImpulse(new Vector2(-player.getDashSpeed(), 0), player.getB2Body().getWorldCenter(), true);
+            }
+            else if(Gdx.input.isKeyJustPressed(Input.Keys.X)){
+                player.getB2Body().applyLinearImpulse(new Vector2(player.getDashSpeed(), 0), player.getB2Body().getWorldCenter(), true);
             }
         }
     }
