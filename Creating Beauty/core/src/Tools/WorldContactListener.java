@@ -19,21 +19,12 @@ public class WorldContactListener implements ContactListener {
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
-        if(fixA.getUserData() == "head" || fixB.getUserData() == "head"){
-            Fixture head = fixA.getUserData() == "head" ? fixA : fixB;
-            Fixture object = head == fixA ? fixB : fixA;
-
-            if(object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())){
-                ((InteractiveTileObject) object.getUserData()).onHeadHit();
-            }
-        }
-
         switch (cDef) {
             case CreatingBeauty.ENEMY_HEAD_BIT | CreatingBeauty.PLAYER_BIT:
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_HEAD_BIT)
                     ((Enemy) fixA.getUserData()).hitOnHead((Player) fixB.getUserData());
                 else
-                    ((Enemy) fixB.getUserData()).hitOnHead((Player) fixA.getUserData()); //creashes when dashing into koopa shell
+                    ((Enemy) fixB.getUserData()).hitOnHead((Player) fixA.getUserData()); //crashes when dashing into koopa shell
                 break;
             case CreatingBeauty.ENEMY_BIT | CreatingBeauty.OBJECT_BIT:
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_BIT)
@@ -47,11 +38,26 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Player) fixB.getUserData()).hit((Enemy) fixA.getUserData());
                 break;
+            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.BRICK_BIT:
+            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.COIN_BIT:
+                if(fixA.getUserData() == "head" || fixB.getUserData() == "head"){
+                    Fixture head = fixA.getUserData() == "head" ? fixA : fixB;
+                    Fixture object = head == fixA ? fixB : fixA;
+
+                    if(object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())){
+                        ((InteractiveTileObject) object.getUserData()).onHeadHit();
+                    }
+                    else if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT)
+                        ((Player) fixA.getUserData()).setJumpsRemaining(1);
+                    else
+                        ((Player) fixB.getUserData()).setJumpsRemaining(1);
+                    break;
+                }
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.GROUND_BIT:
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.OBJECT_BIT:
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT)
                     ((Player) fixA.getUserData()).setJumpsRemaining(1);
-                else if (((Player)fixB.getUserData()).getJumpsRemaining() == 0)
+                else
                     ((Player) fixB.getUserData()).setJumpsRemaining(1);
                 break;
             case CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_BIT:

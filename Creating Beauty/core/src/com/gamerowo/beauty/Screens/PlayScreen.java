@@ -7,18 +7,11 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -27,7 +20,6 @@ import com.gamerowo.beauty.CreatingBeauty;
 import com.gamerowo.beauty.Scenes.Hud;
 
 import com.gamerowo.beauty.Sprites.Enemy;
-import com.gamerowo.beauty.Sprites.Goomba;
 import com.gamerowo.beauty.Sprites.Player;
 
 import Tools.B2WorldCreator;
@@ -35,7 +27,8 @@ import Tools.WorldContactListener;
 
 public class PlayScreen implements Screen {
     private CreatingBeauty game;
-    private TextureAtlas atlas;
+    private TextureAtlas marioAtlas;
+    private TextureAtlas playerAtlas;
     private OrthographicCamera cam;
     private Viewport port;
     private Hud hud;
@@ -56,7 +49,8 @@ public class PlayScreen implements Screen {
     private Music music;
 
     public PlayScreen(CreatingBeauty game){
-        atlas = new TextureAtlas("Mario_and_Enemies.pack");
+        marioAtlas = new TextureAtlas("Mario_and_Enemies.pack");
+        playerAtlas = new TextureAtlas("Player.pack");
 
         this.game = game;
         cam = new OrthographicCamera();
@@ -82,8 +76,11 @@ public class PlayScreen implements Screen {
         music.play();
     }
 
-    public TextureAtlas getAtlas(){
-        return atlas;
+    public TextureAtlas getMarioAtlas(){
+        return marioAtlas;
+    }
+    public TextureAtlas getPlayerAtlas(){
+        return playerAtlas;
     }
 
     @Override

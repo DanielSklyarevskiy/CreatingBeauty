@@ -31,9 +31,9 @@ public class Koopa extends Enemy{
     public Koopa(PlayScreen screen, float x, float y) {
         super(screen, x, y);
         frames = new Array<TextureRegion>();
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("turtle"), 0, 0, 16, 24));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("turtle"), 16, 0, 16, 24));
-        shell = new TextureRegion(screen.getAtlas().findRegion("turtle"), 64, 0, 16, 24);
+        frames.add(new TextureRegion(screen.getMarioAtlas().findRegion("turtle"), 0, 0, 16, 24));
+        frames.add(new TextureRegion(screen.getMarioAtlas().findRegion("turtle"), 16, 0, 16, 24));
+        shell = new TextureRegion(screen.getMarioAtlas().findRegion("turtle"), 64, 0, 16, 24);
         walkAnimation = new Animation(0.2f, frames);
         currentState = previousState = State.WALKING;
 

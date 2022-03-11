@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="53">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="66">
  <tileset firstgid="1" source="tileset_gutter.tsx"/>
  <layer id="1" name="background" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt08EJADAMAzHT/RfKdiFDlJIig/7+XJ2kAAAAAAAAAPjO7PUH4A59AwAAsFEDS17mEw==
+   eJztwzEJAAAMA7Ay/4bqrir2JZBeUlVVVVVVVVVVVVVV1ccDxULniQ==
   </data>
  </layer>
  <layer id="2" name="graphics" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt0zESQDAQBdBkVByFo3AU7t9KqSEjURDvzWy1u7/aDQEAAAAAAACA1nSHAtriv+Fd+hjCEO/3cjM1uyXmlLM8lAVfMaabn07u/qqXm6nZLbGmnM3/8jOxsYI/2QHjmgPX
+   eJzt07kNhEAMBVCPNmI7oIWlFChl6T9lkEgBcUiImfckRz4i/wgAAAAAKNdnKeBZcw7bkEcokXwDAFC7JkV80/He3syV3TP6fGe46Ra8xS//fLfy91u9vZkru2f8851RfqlMKqygJhNIaAQJ
   </data>
  </layer>
  <objectgroup id="3" name="ground">
@@ -29,14 +29,16 @@
   <object id="47" x="800" y="160" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="5" name="coins">
-  <object id="19" x="192" y="144" width="16" height="16"/>
-  <object id="20" x="64" y="128" width="16" height="16"/>
+  <object id="64" x="192" y="112" width="16" height="16"/>
+  <object id="65" x="64" y="96" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="bricks">
-  <object id="13" x="48" y="128" width="16" height="16"/>
-  <object id="15" x="80" y="128" width="16" height="16"/>
-  <object id="16" x="176" y="144" width="16" height="16"/>
-  <object id="18" x="208" y="144" width="16" height="16"/>
+  <object id="58" x="256" y="80" width="16" height="16"/>
+  <object id="59" x="272" y="80" width="16" height="16"/>
+  <object id="60" x="208" y="112" width="16" height="16"/>
+  <object id="61" x="176" y="112" width="16" height="16"/>
+  <object id="62" x="48" y="96" width="16" height="16"/>
+  <object id="63" x="80" y="96" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="8" name="goombas">
   <object id="24" x="48" y="176" width="16" height="16"/>

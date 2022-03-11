@@ -18,8 +18,6 @@ import com.badlogic.gdx.utils.Array;
 import com.gamerowo.beauty.CreatingBeauty;
 import com.gamerowo.beauty.Screens.PlayScreen;
 
-import java.lang.management.ManagementFactory;
-
 public class Player extends Sprite {
     public enum State {FALLING, JUMPING, STANDING, RUNNING, DEAD};
     public State currentState;
@@ -28,8 +26,8 @@ public class Player extends Sprite {
     private Body b2Body;
     private TextureRegion playerStand;
     private TextureRegion playerDead;
+    private TextureRegion playerJump;
     private Animation playerRun;
-    private Animation playerJump;
     private int jumpsRemaining;
     private float dashSpeed;
     private float stateTimer;
@@ -37,7 +35,7 @@ public class Player extends Sprite {
     private boolean isDead;
 
     public Player(PlayScreen screen){
-        super(screen.getAtlas().findRegion("little_mario"));
+        super(screen.getPlayerAtlas().findRegion("PlayerAnimations"));
         this.world = screen.getWorld();
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -47,22 +45,24 @@ public class Player extends Sprite {
         dashSpeed = 1.3f;
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
-        for (int i = 1; i < 4; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 10, 16, 16));
+        for (int i = 3; i < 6; i++)
+            frames.add(new TextureRegion(getTexture(), i * 32 + 8, 0, 32, 42));
+System.out.println(frames.size);
         playerRun = new Animation(0.1f, frames);
         frames.clear();
 
         for (int i = 4; i < 6; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 10, 16, 16));
-        playerJump = new Animation(0.1f, frames);
+            frames.add(new TextureRegion(getTexture(), i * 16, 0, 32, 42));
         frames.clear();
 
-        playerStand = new TextureRegion(getTexture(), 0, 10, 16, 16);
+        playerStand = new TextureRegion(getTexture(), 32, 0, 32, 42);
 
-        playerDead = new TextureRegion(getTexture(), 96, 10, 16, 16);
+        playerJump = new TextureRegion(getTexture(), 64, 0, 32, 42);
+
+        playerDead = new TextureRegion(getTexture(), 0, 0, 32, 42);
 
         definePlayer();
-        setBounds(0, 0, 16 / CreatingBeauty.getPPM(), 16 / CreatingBeauty.getPPM());
+        setBounds(0, 0, 24 / CreatingBeauty.getPPM(), 24 / CreatingBeauty.getPPM());
         setRegion(playerStand);
     }
 
@@ -77,7 +77,7 @@ public class Player extends Sprite {
         TextureRegion region;
         switch(currentState){
             case JUMPING:
-                region = (TextureRegion) playerJump.getKeyFrame(stateTimer);
+                region = playerJump;
                 break;
             case RUNNING:
                 region = (TextureRegion) playerRun.getKeyFrame(stateTimer, true);
@@ -118,7 +118,7 @@ public class Player extends Sprite {
 
     public void definePlayer(){
         BodyDef bDef = new BodyDef();
-        bDef.position.set(160 / CreatingBeauty.getPPM(), 32 / CreatingBeauty.getPPM());
+        bDef.position.set(120 / CreatingBeauty.getPPM(), 50 / CreatingBeauty.getPPM());
         bDef.type = BodyDef.BodyType.DynamicBody;
         b2Body = world.createBody(bDef);
 
