@@ -24,12 +24,17 @@ public class Player extends Sprite {
     public State previousState;
     private World world;
     private Body b2Body;
-    private TextureRegion playerStand;
-    private TextureRegion playerDead;
-    private TextureRegion playerJump;
-    private Animation playerRun;
+    private TextureRegion aamirahStand;
+    private TextureRegion aamirahDead;
+    private TextureRegion aamirahJump;
+    private Animation aamirahRun;
+    private TextureRegion dannyStand;
+    private TextureRegion dannyDead;
+    private TextureRegion dannyJump;
+    private Animation dannyRun;
     private int jumpsRemaining;
-    private float dashSpeed;
+    private int dashesRemaining;
+    private final float dashSpeed;
     private float stateTimer;
     private boolean runningRight;
     private boolean isDead;
@@ -42,28 +47,36 @@ public class Player extends Sprite {
         stateTimer = 0;
         runningRight = true;
         jumpsRemaining = 1;
+        dashesRemaining = 2;
         dashSpeed = 1.3f;
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for (int i = 3; i < 6; i++)
             frames.add(new TextureRegion(getTexture(), i * 32 + 8, 0, 32, 42));
-System.out.println(frames.size);
-        playerRun = new Animation(0.1f, frames);
+        aamirahRun = new Animation(0.1f, frames);
         frames.clear();
 
-        for (int i = 4; i < 6; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 32, 42));
-        frames.clear();
+        aamirahStand = new TextureRegion(getTexture(), 32, 0, 32, 42);
 
-        playerStand = new TextureRegion(getTexture(), 32, 0, 32, 42);
+        aamirahJump = new TextureRegion(getTexture(), 64, 0, 32, 42);
 
-        playerJump = new TextureRegion(getTexture(), 64, 0, 32, 42);
+        aamirahDead = new TextureRegion(getTexture(), 0, 0, 32, 42);
 
-        playerDead = new TextureRegion(getTexture(), 0, 0, 32, 42);
+        //Array<TextureRegion> frames = new Array<TextureRegion>();
+//        for (int i = 3; i < 6; i++)
+//            frames.add(new TextureRegion(getTexture(), i * 32 + 8, 0, 32, 42));
+//        aamirahRun = new Animation(0.1f, frames);
+//        frames.clear();
+//
+//        aamirahStand = new TextureRegion(getTexture(), 32, 0, 32, 42);
+//
+//        aamirahJump = new TextureRegion(getTexture(), 256, 0, 32, 42);
+//
+//        aamirahDead = new TextureRegion(getTexture(), 0, 0, 32, 42);
 
         definePlayer();
         setBounds(0, 0, 24 / CreatingBeauty.getPPM(), 24 / CreatingBeauty.getPPM());
-        setRegion(playerStand);
+        setRegion(aamirahStand);
     }
 
     public void update(float dt){
@@ -77,16 +90,16 @@ System.out.println(frames.size);
         TextureRegion region;
         switch(currentState){
             case JUMPING:
-                region = playerJump;
+                region = aamirahJump;
                 break;
             case RUNNING:
-                region = (TextureRegion) playerRun.getKeyFrame(stateTimer, true);
+                region = (TextureRegion) aamirahRun.getKeyFrame(stateTimer, true);
                 break;
             case DEAD:
-                region = playerDead;
+                region = aamirahDead;
                 break;
             default:
-                region = playerStand;
+                region = aamirahStand;
                 break;
         }
 
@@ -191,5 +204,13 @@ System.out.println(frames.size);
 
     public void setJumpsRemaining(int jumpsRemaining) {
         this.jumpsRemaining = jumpsRemaining;
+    }
+
+    public int getDashesRemaining() {
+        return dashesRemaining;
+    }
+
+    public void setDashesRemaining(int dashesRemaining) {
+        this.dashesRemaining = dashesRemaining;
     }
 }

@@ -47,18 +47,26 @@ public class WorldContactListener implements ContactListener {
                     if(object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())){
                         ((InteractiveTileObject) object.getUserData()).onHeadHit();
                     }
-                    else if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT)
+                    else if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT) {
                         ((Player) fixA.getUserData()).setJumpsRemaining(1);
-                    else
+                        ((Player) fixA.getUserData()).setDashesRemaining(2);
+                    }
+                    else {
                         ((Player) fixB.getUserData()).setJumpsRemaining(1);
+                        ((Player) fixB.getUserData()).setDashesRemaining(2);
+                    }
                     break;
                 }
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.GROUND_BIT:
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.OBJECT_BIT:
-                if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT)
+                if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT){
                     ((Player) fixA.getUserData()).setJumpsRemaining(1);
-                else
+                    ((Player) fixA.getUserData()).setDashesRemaining(2);
+                }
+                else {
                     ((Player) fixB.getUserData()).setJumpsRemaining(1);
+                    ((Player) fixB.getUserData()).setDashesRemaining(2);
+                }
                 break;
             case CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_BIT:
                 ((Enemy) fixA.getUserData()).onEnemyHit((Enemy) fixB.getUserData());

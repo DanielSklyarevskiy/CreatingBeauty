@@ -72,7 +72,7 @@ public class Koopa extends Enemy{
         b2Body.createFixture(fDef).setUserData(this);
     }
 
-    public void onEnemyHit(Enemy enemy){
+    public void onEnemyHit(Enemy enemy){ //this doesn't work properly at all
         if(enemy instanceof Koopa){
             if(((Koopa) enemy).currentState == State.MOVING_SHELL && currentState != State.MOVING_SHELL){
                 killed();
