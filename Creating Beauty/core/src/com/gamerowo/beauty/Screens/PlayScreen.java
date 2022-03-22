@@ -32,6 +32,7 @@ public class PlayScreen implements Screen {
     private OrthographicCamera cam;
     private Viewport port;
     private Hud hud;
+    private static boolean gameStart;
 
     //tilemap
     private TmxMapLoader mapLoader;
@@ -151,6 +152,11 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        /*while(!gameStart){
+            game.setScreen(new GameStartScreen(game));
+        }
+        //dispose();
+        */
         update(delta);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -181,6 +187,12 @@ public class PlayScreen implements Screen {
             return true;
         }
         return false;
+    }
+    public static boolean getGameStart(){
+        return gameStart;
+    }
+    public static void setGameStart(boolean gS){
+        gameStart = gS;
     }
 
     @Override
