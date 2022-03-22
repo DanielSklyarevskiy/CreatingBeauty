@@ -102,11 +102,10 @@ public class PlayScreen implements Screen {
             if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.getB2Body().getLinearVelocity().x >= -2){
                 player.getB2Body().applyLinearImpulse(new Vector2(-0.1f, 0), player.getB2Body().getWorldCenter(), true);
             }
-            if(Gdx.input.isKeyJustPressed(Input.Keys.C)){
+            if(Gdx.input.isKeyJustPressed(Input.Keys.X)){
                 player.setIsAamirah(!player.getIsAamirah());
-                System.out.println(player.getIsAamirah());
             }
-            if(Gdx.input.isKeyJustPressed(Input.Keys.X) && !player.getIsAamirah() && player.getDashesRemaining() > 0) {
+            if(Gdx.input.isKeyJustPressed(Input.Keys.C) && !player.getIsAamirah() && player.getDashesRemaining() > 0) {
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) {
                     player.getB2Body().setLinearVelocity(new Vector2(player.getDashSpeed() * 2.5f, player.getDashSpeed() * 2.5f));
                 } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)) {

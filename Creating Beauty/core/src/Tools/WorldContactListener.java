@@ -28,7 +28,7 @@ public class WorldContactListener implements ContactListener {
                     else
                         ((Player) fixB.getUserData()).hit((Enemy) fixA.getUserData());
                 else
-                    if(((Player) fixA.getUserData()).getIsAamirah())
+                    if(((Player) fixA.getUserData()).getIsAamirah()) //makes everything crash a lot
                         ((Enemy) fixB.getUserData()).hitOnHead((Player) fixA.getUserData());
                     else
                         ((Player) fixA.getUserData()).hit((Enemy) fixB.getUserData());

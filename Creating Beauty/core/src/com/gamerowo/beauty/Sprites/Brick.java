@@ -21,7 +21,7 @@ public class Brick extends InteractiveTileObject{
         Gdx.app.log("Brick", "Collision");
         setCategoryFilter(CreatingBeauty.DESTROYED_BIT);
         getCell().setTile(null);
-        Hud.addScore(200);
+        Hud.addScore(100);
         CreatingBeauty.manager.get("audio/sounds/breakblock.wav", Sound.class).play();
     }
 }
