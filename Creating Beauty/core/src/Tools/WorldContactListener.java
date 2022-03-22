@@ -10,6 +10,7 @@ import com.gamerowo.beauty.CreatingBeauty;
 import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.InteractiveTileObject;
 import com.gamerowo.beauty.Sprites.Player;
+import com.gamerowo.beauty.Sprites.Refresher;
 
 public class WorldContactListener implements ContactListener {
     @Override
@@ -77,6 +78,19 @@ public class WorldContactListener implements ContactListener {
             case CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_BIT:
                 ((Enemy) fixA.getUserData()).onEnemyHit((Enemy) fixB.getUserData());
                 ((Enemy) fixB.getUserData()).onEnemyHit((Enemy) fixA.getUserData());
+                break;
+            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.REFRESHER_BIT:
+                System.out.println("uwu");
+                if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT){
+                    //((Player) fixA.getUserData()).setDashesRemaining(2);
+                    ((Refresher) fixB.getUserData()).isActive = false;
+                    ((Refresher) fixB.getUserData()).refresherTimeCount = 0;
+                }
+                else {
+                    //((Player) fixB.getUserData()).setDashesRemaining(2);
+                    ((Refresher) fixA.getUserData()).isActive = false;
+                    ((Refresher) fixA.getUserData()).refresherTimeCount = 0;
+                }
                 break;
         }
     }

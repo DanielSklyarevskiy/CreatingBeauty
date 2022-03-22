@@ -2,6 +2,7 @@ package com.gamerowo.beauty.Screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -33,7 +34,7 @@ public class GameOverScreen implements Screen {
         table.setFillParent(true);
 
         Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Click to play again", font);
+        Label playAgainLabel = new Label("Press any key to restart", font);
 
         table.add(gameOverLabel).expandX();
         table.row();
@@ -49,7 +50,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
             game.setScreen(new PlayScreen((CreatingBeauty) game));
             dispose();
         }

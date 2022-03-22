@@ -17,12 +17,15 @@ import com.gamerowo.beauty.Sprites.Coin;
 import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.Goomba;
 import com.gamerowo.beauty.Sprites.Koopa;
+import com.gamerowo.beauty.Sprites.Player;
+import com.gamerowo.beauty.Sprites.Refresher;
 
 public class B2WorldCreator {
     private Array<Goomba> goombas;
     private Array<Koopa> koopas;
+    private Array<Refresher> refreshers;
 
-    public B2WorldCreator(PlayScreen screen) {
+    public B2WorldCreator(PlayScreen screen, Player player) {
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
 
@@ -80,6 +83,12 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             koopas.add(new Koopa(screen, rect.getX() / CreatingBeauty.getPPM(), rect.getY() / CreatingBeauty.getPPM()));
         }
+        //refreshers
+        refreshers = new Array<Refresher>();
+        for(MapObject object: map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            refreshers.add(new Refresher(screen, rect, player));
+        }
     }
 
     public Array<Enemy> getEnemies(){
@@ -87,5 +96,8 @@ public class B2WorldCreator {
         enemies.addAll(goombas);
         enemies.addAll(koopas);
         return enemies;
+    }
+    public Array<Refresher> getRefreshers(){
+        return refreshers;
     }
 }

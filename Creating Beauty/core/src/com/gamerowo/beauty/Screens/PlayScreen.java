@@ -21,6 +21,7 @@ import com.gamerowo.beauty.Scenes.Hud;
 
 import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.Player;
+import com.gamerowo.beauty.Sprites.Refresher;
 
 import Tools.B2WorldCreator;
 import Tools.WorldContactListener;
@@ -65,7 +66,7 @@ public class PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        creator = new B2WorldCreator(this);
+        creator = new B2WorldCreator(this, player);
 
         player = new Player(this);
 
@@ -140,6 +141,9 @@ public class PlayScreen implements Screen {
                 enemy.b2Body.setActive(true);
         }
         hud.update(dt);
+        for (Refresher refresher : creator.getRefreshers()){
+            refresher.update(dt);
+        }
 
         if(player.currentState != Player.State.DEAD){
             cam.position.x = player.getB2Body().getPosition().x;
