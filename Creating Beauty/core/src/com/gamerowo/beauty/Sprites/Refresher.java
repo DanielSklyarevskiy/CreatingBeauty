@@ -9,7 +9,7 @@ import com.gamerowo.beauty.Screens.PlayScreen;
 
 public class Refresher extends InteractiveTileObject{
     private Player player;
-    public boolean isActive = true;
+    private boolean isActive = true;
     private TiledMapTileSet set;
     public float refresherTimeCount;
 
@@ -30,7 +30,15 @@ public class Refresher extends InteractiveTileObject{
         if(refresherTimeCount >= 1) refresherTimeCount += dt;
         else if (!isActive){
             isActive = true;
+            //setCategoryFilter(CreatingBeauty.REFRESHER_BIT);
             //getCell().setTile(set.getTile(BLANK_COIN));
         }
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+    public void setIsActive(boolean s){
+        isActive = s;
     }
 }

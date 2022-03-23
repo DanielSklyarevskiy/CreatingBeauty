@@ -80,15 +80,16 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixB.getUserData()).onEnemyHit((Enemy) fixA.getUserData());
                 break;
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.REFRESHER_BIT:
-                System.out.println("uwu");
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT){
-                    //((Player) fixA.getUserData()).setDashesRemaining(2);
-                    ((Refresher) fixB.getUserData()).isActive = false;
+                    ((Refresher) fixB.getUserData()).setCategoryFilter(CreatingBeauty.NOTHING_BIT);
+                    ((Player) fixA.getUserData()).setDashesRemaining(2);
+                    ((Refresher) fixB.getUserData()).setIsActive(false);
                     ((Refresher) fixB.getUserData()).refresherTimeCount = 0;
                 }
                 else {
-                    //((Player) fixB.getUserData()).setDashesRemaining(2);
-                    ((Refresher) fixA.getUserData()).isActive = false;
+                    ((Refresher) fixA.getUserData()).setCategoryFilter(CreatingBeauty.NOTHING_BIT);
+                    ((Player) fixB.getUserData()).setDashesRemaining(2);
+                    ((Refresher) fixA.getUserData()).setIsActive(false);
                     ((Refresher) fixA.getUserData()).refresherTimeCount = 0;
                 }
                 break;
