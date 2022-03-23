@@ -29,9 +29,10 @@ public class Coin extends InteractiveTileObject{
         Gdx.app.log("Coin", "Collision");
         if(getCell().getTile().getId() == BLANK_COIN)
             CreatingBeauty.manager.get("audio/sounds/bump.wav", Sound.class).play();
-        else
+        else {
+            Hud.addScore(200);
             CreatingBeauty.manager.get("audio/sounds/coin.wav", Sound.class).play();
+        }
         getCell().setTile(set.getTile(BLANK_COIN));
-        Hud.addScore(100);
     }
 }
