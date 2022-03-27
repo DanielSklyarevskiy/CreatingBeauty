@@ -47,7 +47,7 @@ public class Player extends Sprite {
         previousState = State.STANDING;
         stateTimer = 0;
         runningRight = true;
-        jumpsRemaining = 1;
+        jumpsRemaining = 100000;
         dashesRemaining = 2;
         dashSpeed = 1.3f;
 
@@ -162,8 +162,8 @@ public class Player extends Sprite {
         shape.setRadius(6 / CreatingBeauty.getPPM());
         fDef.filter.categoryBits = CreatingBeauty.PLAYER_BIT;
         fDef.filter.maskBits = CreatingBeauty.GROUND_BIT | CreatingBeauty.COIN_BIT | CreatingBeauty.BRICK_BIT |
-                               CreatingBeauty.OBJECT_BIT | CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_HEAD_BIT;
-        fDef.filter.maskBits += CreatingBeauty.REFRESHER_BIT;
+                               CreatingBeauty.OBJECT_BIT | CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_HEAD_BIT |
+                               CreatingBeauty.REFRESHER_BIT | CreatingBeauty.CHECKPOINT_BIT | CreatingBeauty.TOP_BIT;
 
         fDef.shape = shape;
         b2Body.createFixture(fDef).setUserData(this);

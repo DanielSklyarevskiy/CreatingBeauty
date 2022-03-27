@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.gamerowo.beauty.CreatingBeauty;
 import com.gamerowo.beauty.Screens.PlayScreen;
 import com.gamerowo.beauty.Sprites.Brick;
+import com.gamerowo.beauty.Sprites.Checkpoint;
 import com.gamerowo.beauty.Sprites.Coin;
 import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.Goomba;
@@ -24,6 +25,7 @@ public class B2WorldCreator {
     private Array<Goomba> goombas;
     private Array<Koopa> koopas;
     private Array<Refresher> refreshers;
+    private Array<Checkpoint> checkpoints;
 
     public B2WorldCreator(PlayScreen screen, Player player) {
         World world = screen.getWorld();
@@ -71,7 +73,7 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Coin(screen, rect);
         }
-        //goombas
+        /*//goombas
         goombas = new Array<Goomba>();
         for(MapObject object: map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -82,12 +84,32 @@ public class B2WorldCreator {
         for(MapObject object: map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             koopas.add(new Koopa(screen, rect.getX() / CreatingBeauty.getPPM(), rect.getY() / CreatingBeauty.getPPM()));
-        }
+        }*/
         //refreshers
         refreshers = new Array<Refresher>();
         for(MapObject object: map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             refreshers.add(new Refresher(screen, rect, player));
+        }
+        //checkpoints
+        checkpoints = new Array<Checkpoint>();
+        for(MapObject object: map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            checkpoints.add(new Checkpoint(screen, rect, player));
+        }
+        //tops
+        for(MapObject object: map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / CreatingBeauty.getPPM(), (rect.getY() + rect.getHeight() / 2) / CreatingBeauty.getPPM());
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2 / CreatingBeauty.getPPM(), rect.getHeight() / 2 / CreatingBeauty.getPPM());
+            fdef.shape = shape;
+            fdef.filter.categoryBits = CreatingBeauty.TOP_BIT;
+            body.createFixture(fdef);
         }
     }
 
@@ -99,5 +121,8 @@ public class B2WorldCreator {
     }
     public Array<Refresher> getRefreshers(){
         return refreshers;
+    }
+    public Array<Checkpoint> getCheckpoints(){
+        return checkpoints;
     }
 }

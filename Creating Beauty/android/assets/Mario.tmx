@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="68">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="88">
  <tileset firstgid="1" source="tileset_gutter.tsx"/>
  <layer id="1" name="background" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7Ay/4bqrir2JZBeUlVVVVVVVVVVVVVV1ccDxULniQ==
+   eJztzqENADAMA7Cop+z/B/rdYNFwNcnA3F1JAwAAAADAp07etm8AAAAAAACMC9KI41o=
   </data>
  </layer>
  <layer id="2" name="graphics" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt1bsNgzAQANCzUiUbsEIYJRkl2YHRMRIVAqxAKDDvSdf4PtWdHAEAAAAA9bqNMdXNPQKHGU6uifl7BM6tdN/+XAAAandPEY/0e65Us6d3i1ee8/7TLDiLZ975dmHv13Klmj29W3zynK/75WJSZQFX0gPTfAUP
+   eJzt1cENwjAMAEBHvGADVoBRyiiwAyt3A1KJV1VIm1KhtneSP7Fj5WErEQAAAMAY7b8fAFQ5vKPvOXQILKZbuXMM7yOwbqX99ucCALB1xxRxStNzpZo5d2s0uc/tR71gLS555q8f5v5brlQz526Ne+7zsL/sTNpYwJ68AFsYBgA=
   </data>
  </layer>
  <objectgroup id="3" name="ground">
@@ -19,6 +19,8 @@
   <object id="38" x="416.667" y="209.333" height="0.666667"/>
   <object id="42" x="352" y="192" width="176" height="16"/>
   <object id="45" x="528" y="192" width="304" height="16"/>
+  <object id="73" x="-80" y="0" width="80" height="208"/>
+  <object id="86" x="416" y="96" width="112" height="16"/>
  </objectgroup>
  <objectgroup id="4" name="pipes">
   <object id="5" x="256" y="160" width="32" height="32"/>
@@ -45,7 +47,6 @@
   <object id="25" x="176" y="176" width="16" height="16"/>
   <object id="26" x="224" y="176" width="16" height="16"/>
   <object id="30" x="448" y="176" width="16" height="16"/>
-  <object id="49" x="592" y="176" width="16"/>
   <object id="52" x="624" y="176" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="9" name="koopas">
@@ -57,5 +58,17 @@
   <object id="66" x="304" y="112" width="16" height="16"/>
   <object id="67" x="352" y="80" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="11" name="checkpoints"/>
+ <objectgroup id="11" name="checkpoints">
+  <object id="68" x="272" y="64" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="13" name="top">
+  <object id="77" x="0" y="192" width="832"/>
+  <object id="78" x="0" y="160" width="32"/>
+  <object id="79" x="112" y="160" width="32"/>
+  <object id="80" x="256" y="160" width="32"/>
+  <object id="81" x="352" y="160" width="32"/>
+  <object id="82" x="496" y="160" width="32"/>
+  <object id="83" x="800" y="160" width="32"/>
+  <object id="87" x="416" y="96" width="112"/>
+ </objectgroup>
 </map>

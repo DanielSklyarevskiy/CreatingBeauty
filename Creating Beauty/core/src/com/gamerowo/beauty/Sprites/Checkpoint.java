@@ -6,7 +6,7 @@ import com.gamerowo.beauty.Screens.PlayScreen;
 
 
 public class Checkpoint extends InteractiveTileObject{
-    public Checkpoint(PlayScreen screen, Rectangle bounds){
+    public Checkpoint(PlayScreen screen, Rectangle bounds, Player player){
         super(screen, bounds);
         fixture.setUserData(this);
         setCategoryFilter(CreatingBeauty.CHECKPOINT_BIT);

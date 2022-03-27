@@ -64,8 +64,7 @@ public class WorldContactListener implements ContactListener {
                     }
                     break;
                 }
-            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.GROUND_BIT:
-            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.OBJECT_BIT:
+            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.TOP_BIT:
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT){
                     ((Player) fixA.getUserData()).setJumpsRemaining(1);
                     ((Player) fixA.getUserData()).setDashesRemaining(2);

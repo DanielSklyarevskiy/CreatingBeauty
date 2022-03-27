@@ -24,6 +24,7 @@ public class CreatingBeauty extends Game {
 	public static final short ENEMY_HEAD_BIT = 128;
 	public static final short CHECKPOINT_BIT = 256;
 	public static final short REFRESHER_BIT = 512;
+	public static final short TOP_BIT = 1024;
 
 	private SpriteBatch batch;
 

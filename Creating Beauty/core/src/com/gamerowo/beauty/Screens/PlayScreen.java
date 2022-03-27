@@ -135,11 +135,11 @@ public class PlayScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(dt);
-        for (Enemy enemy : creator.getEnemies()) {
+        /*for (Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
             if(enemy.getX() < player.getX() + 224 / CreatingBeauty.getPPM())
                 enemy.b2Body.setActive(true);
-        }
+        }*/
         hud.update(dt);
         for (Refresher refresher : creator.getRefreshers()){
             refresher.update(dt);
@@ -173,8 +173,8 @@ public class PlayScreen implements Screen {
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
         player.draw(game.getBatch());
-        for (Enemy enemy : creator.getEnemies())
-            enemy.draw(game.getBatch());
+        /*for (Enemy enemy : creator.getEnemies())
+            enemy.draw(game.getBatch());*/
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);
