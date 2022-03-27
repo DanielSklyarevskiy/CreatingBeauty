@@ -59,23 +59,7 @@ public class PlayScreen implements Screen {
         port = new FitViewport(CreatingBeauty.getWorldWidth() / CreatingBeauty.getPPM(), CreatingBeauty.getWorldHeight() / CreatingBeauty.getPPM(), cam);
         hud = new Hud(game.getBatch());
 
-        mapLoader = new TmxMapLoader();
-        map = mapLoader.load("Mario.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / CreatingBeauty.getPPM());
-        cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
-
-        world = new World(new Vector2(0, -10), true);
-        b2dr = new Box2DDebugRenderer();
-
-        player = new Player(this);
-        creator = new B2WorldCreator(this, player);
-
-        world.setContactListener(new WorldContactListener());
-
-        music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
-        music.setLooping(true);
-        music.setVolume(0.1f);
-        music.play();
+        startLevel();
     }
 
     public TextureAtlas getMarioAtlas(){
@@ -115,7 +99,6 @@ public class PlayScreen implements Screen {
                 } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                     player.getB2Body().setLinearVelocity(new Vector2(-player.getDashSpeed() * 2f, -player.getDashSpeed() * 2f));
                 } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                    //player.getB2Body().applyLinearImpulse(new Vector2(0, 4f), player.getB2Body().getWorldCenter(), true);
                     player.getB2Body().setLinearVelocity(new Vector2(0, player.getDashSpeed() * 3));
                 } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                     player.getB2Body().applyLinearImpulse(new Vector2(0, -player.getDashSpeed() * 1.5f), player.getB2Body().getWorldCenter(), true);
@@ -126,6 +109,10 @@ public class PlayScreen implements Screen {
                 }
                 player.setDashesRemaining(player.getDashesRemaining()-1);
             }
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACKSLASH)){
+            CreatingBeauty.currentLevel++;
+            startLevel();
         }
     }
     public void update(float dt){
@@ -154,13 +141,34 @@ public class PlayScreen implements Screen {
         renderer.setView(cam);
     }
 
+    public void startLevel(){
+        if(CreatingBeauty.currentLevel == 0) {
+            mapLoader = new TmxMapLoader();
+            map = mapLoader.load("Mario.tmx");
+        }
+        else if(CreatingBeauty.currentLevel == 1) {
+            mapLoader = new TmxMapLoader();
+            map = mapLoader.load("Kirby.tmx");
+        }
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / CreatingBeauty.getPPM());
+        cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
+
+        world = new World(new Vector2(0, -10), true);
+        b2dr = new Box2DDebugRenderer();
+
+        player = new Player(this);
+        creator = new B2WorldCreator(this, player);
+
+        world.setContactListener(new WorldContactListener());
+
+        music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
+    }
+
     @Override
     public void render(float delta) {
-        /*while(!gameStart){
-            game.setScreen(new GameStartScreen(game));
-        }
-        //dispose();
-        */
         update(delta);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);

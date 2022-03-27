@@ -30,6 +30,7 @@ public class CreatingBeauty extends Game {
 	private SpriteBatch batch;
 
 	public static AssetManager manager;
+	public static int currentLevel;
 
 	@Override
 	public void create () {
