@@ -163,7 +163,6 @@ public class Player extends Sprite {
         fDef.filter.categoryBits = CreatingBeauty.PLAYER_BIT;
         fDef.filter.maskBits = CreatingBeauty.GROUND_BIT | CreatingBeauty.COIN_BIT | CreatingBeauty.BRICK_BIT |
                                CreatingBeauty.OBJECT_BIT | CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_HEAD_BIT;
-                               //CreatingBeauty.REFRESHER_BIT | CreatingBeauty.CHECKPOINT_BIT;
         fDef.filter.maskBits += CreatingBeauty.REFRESHER_BIT;
 
         fDef.shape = shape;

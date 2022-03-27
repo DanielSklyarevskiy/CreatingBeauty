@@ -115,6 +115,7 @@ public class PlayScreen implements Screen {
                 } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                     player.getB2Body().setLinearVelocity(new Vector2(-player.getDashSpeed() * 2f, -player.getDashSpeed() * 2f));
                 } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                    //player.getB2Body().applyLinearImpulse(new Vector2(0, 4f), player.getB2Body().getWorldCenter(), true);
                     player.getB2Body().setLinearVelocity(new Vector2(0, player.getDashSpeed() * 3));
                 } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                     player.getB2Body().applyLinearImpulse(new Vector2(0, -player.getDashSpeed() * 1.5f), player.getB2Body().getWorldCenter(), true);

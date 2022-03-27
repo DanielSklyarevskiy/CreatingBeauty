@@ -81,15 +81,17 @@ public class WorldContactListener implements ContactListener {
                 break;
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.REFRESHER_BIT:
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT){
-                    ((Refresher) fixB.getUserData()).setCategoryFilter(CreatingBeauty.NOTHING_BIT);
                     ((Player) fixA.getUserData()).setDashesRemaining(2);
+                    ((Refresher) fixB.getUserData()).setCategoryFilter(CreatingBeauty.NOTHING_BIT);
                     ((Refresher) fixB.getUserData()).setIsActive(false);
+                    ((Refresher) fixB.getUserData()).getCell().setTile(((Refresher) fixB.getUserData()).getSet().getTile(29));
                     ((Refresher) fixB.getUserData()).refresherTimeCount = 0;
                 }
                 else {
-                    ((Refresher) fixA.getUserData()).setCategoryFilter(CreatingBeauty.NOTHING_BIT);
                     ((Player) fixB.getUserData()).setDashesRemaining(2);
+                    ((Refresher) fixA.getUserData()).setCategoryFilter(CreatingBeauty.NOTHING_BIT);
                     ((Refresher) fixA.getUserData()).setIsActive(false);
+                    ((Refresher) fixA.getUserData()).getCell().setTile(((Refresher) fixA.getUserData()).getSet().getTile(29));
                     ((Refresher) fixA.getUserData()).refresherTimeCount = 0;
                 }
                 break;

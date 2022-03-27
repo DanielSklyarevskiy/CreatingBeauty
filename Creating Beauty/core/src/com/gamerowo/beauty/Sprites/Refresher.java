@@ -27,11 +27,11 @@ public class Refresher extends InteractiveTileObject{
     }
 
     public void update(float dt){
-        if(refresherTimeCount >= 1) refresherTimeCount += dt;
+        if(refresherTimeCount <= 3) refresherTimeCount += dt;
         else if (!isActive){
             isActive = true;
-            //setCategoryFilter(CreatingBeauty.REFRESHER_BIT);
-            //getCell().setTile(set.getTile(BLANK_COIN));
+            setCategoryFilter(CreatingBeauty.REFRESHER_BIT);
+            getCell().setTile(set.getTile(BLANK_COIN));
         }
     }
 
@@ -40,5 +40,9 @@ public class Refresher extends InteractiveTileObject{
     }
     public void setIsActive(boolean s){
         isActive = s;
+    }
+
+    public TiledMapTileSet getSet() {
+        return set;
     }
 }
