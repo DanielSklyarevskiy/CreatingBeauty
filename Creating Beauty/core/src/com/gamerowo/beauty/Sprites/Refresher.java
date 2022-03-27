@@ -20,6 +20,7 @@ public class Refresher extends InteractiveTileObject{
         set = map.getTileSets().getTileSet("tileset_gutter");
         fixture.setUserData(this);
         setCategoryFilter(CreatingBeauty.REFRESHER_BIT);
+        this.player = player;
     }
 
     @Override
@@ -33,6 +34,11 @@ public class Refresher extends InteractiveTileObject{
             setCategoryFilter(CreatingBeauty.REFRESHER_BIT);
             getCell().setTile(set.getTile(BLANK_COIN));
         }
+    }
+
+    public void setPlayerDashes(int dashes){
+        System.out.println("iwi");
+        player.setDashesRemaining(dashes);
     }
 
     public boolean isActive() {
