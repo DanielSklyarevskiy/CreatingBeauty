@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.gamerowo.beauty.CreatingBeauty;
+import com.gamerowo.beauty.Scenes.Hud;
 import com.gamerowo.beauty.Screens.PlayScreen;
 
 public class Goomba extends Enemy{
@@ -86,12 +87,15 @@ public class Goomba extends Enemy{
 
     @Override
     public void hitOnHead(Player player) {
+        Hud.addScore(200);
         setToDestroy = true;
     }
 
     public void onEnemyHit(Enemy enemy){
-        if(enemy instanceof Koopa &&((Koopa) enemy).currentState == Koopa.State.MOVING_SHELL)
+        if(enemy instanceof Koopa &&((Koopa) enemy).currentState == Koopa.State.MOVING_SHELL){
            setToDestroy = true;
+            Hud.addScore(300);
+        }
         else
             reverseVelocity(true, false);
     }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.gamerowo.beauty.CreatingBeauty;
+import com.gamerowo.beauty.Scenes.Hud;
 import com.gamerowo.beauty.Screens.PlayScreen;
 
 public class Koopa extends Enemy{
@@ -160,6 +161,7 @@ public class Koopa extends Enemy{
     }
 
     public void killed(){
+        Hud.addScore(700);
         currentState = State.DEAD;
         Filter filter = new Filter();
         filter.maskBits = CreatingBeauty.NOTHING_BIT;

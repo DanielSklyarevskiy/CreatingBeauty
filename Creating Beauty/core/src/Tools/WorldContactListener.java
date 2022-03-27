@@ -94,6 +94,13 @@ public class WorldContactListener implements ContactListener {
                     ((Refresher) fixA.getUserData()).refresherTimeCount = 0;
                 }
                 break;
+            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.ABYSS_BIT:
+                if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT)
+                    ((Player) fixA.getUserData()).die();
+                else
+                    ((Player) fixB.getUserData()).die();
+                break;
+
         }
     }
 

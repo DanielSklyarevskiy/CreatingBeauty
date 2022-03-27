@@ -153,7 +153,7 @@ public class Player extends Sprite {
 
     public void definePlayer(){
         BodyDef bDef = new BodyDef();
-        bDef.position.set(120 / CreatingBeauty.getPPM(), 50 / CreatingBeauty.getPPM());
+        bDef.position.set(240 / CreatingBeauty.getPPM(), 200 / CreatingBeauty.getPPM());
         bDef.type = BodyDef.BodyType.DynamicBody;
         b2Body = world.createBody(bDef);
 
@@ -163,7 +163,7 @@ public class Player extends Sprite {
         fDef.filter.categoryBits = CreatingBeauty.PLAYER_BIT;
         fDef.filter.maskBits = CreatingBeauty.GROUND_BIT | CreatingBeauty.COIN_BIT | CreatingBeauty.BRICK_BIT |
                                CreatingBeauty.OBJECT_BIT | CreatingBeauty.ENEMY_BIT | CreatingBeauty.ENEMY_HEAD_BIT |
-                               CreatingBeauty.REFRESHER_BIT | CreatingBeauty.CHECKPOINT_BIT | CreatingBeauty.TOP_BIT;
+                               CreatingBeauty.REFRESHER_BIT | CreatingBeauty.CHECKPOINT_BIT | CreatingBeauty.TOP_BIT | CreatingBeauty.ABYSS_BIT;
 
         fDef.shape = shape;
         b2Body.createFixture(fDef).setUserData(this);
@@ -181,15 +181,18 @@ public class Player extends Sprite {
             ((Koopa) enemy).kick(this.getX() <= enemy.getX() ? Koopa.KICK_RIGHT_SPEED : Koopa.KICK_LEFT_SPEED);
         }
         else {
-            CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class).stop();
-            CreatingBeauty.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
-            isDead = true;
-            Filter filter = new Filter();
-            filter.maskBits = CreatingBeauty.NOTHING_BIT;
-            for (Fixture fixture: b2Body.getFixtureList())
-                fixture.setFilterData(filter);
-            b2Body.applyLinearImpulse(new Vector2(0, 4f), b2Body.getWorldCenter(), true);
+            die();
         }
+    }
+    public void die(){
+        CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class).stop();
+        CreatingBeauty.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
+        isDead = true;
+        Filter filter = new Filter();
+        filter.maskBits = CreatingBeauty.NOTHING_BIT;
+        for (Fixture fixture: b2Body.getFixtureList())
+            fixture.setFilterData(filter);
+        b2Body.applyLinearImpulse(new Vector2(0, 4f), b2Body.getWorldCenter(), true);
     }
 
     //getters & setters

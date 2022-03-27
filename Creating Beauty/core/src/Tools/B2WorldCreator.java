@@ -73,7 +73,7 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Coin(screen, rect);
         }
-        /*//goombas
+        //goombas
         goombas = new Array<Goomba>();
         for(MapObject object: map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -84,7 +84,7 @@ public class B2WorldCreator {
         for(MapObject object: map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             koopas.add(new Koopa(screen, rect.getX() / CreatingBeauty.getPPM(), rect.getY() / CreatingBeauty.getPPM()));
-        }*/
+        }
         //refreshers
         refreshers = new Array<Refresher>();
         for(MapObject object: map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
@@ -109,6 +109,20 @@ public class B2WorldCreator {
             shape.setAsBox(rect.getWidth() / 2 / CreatingBeauty.getPPM(), rect.getHeight() / 2 / CreatingBeauty.getPPM());
             fdef.shape = shape;
             fdef.filter.categoryBits = CreatingBeauty.TOP_BIT;
+            body.createFixture(fdef);
+        }
+        //abyss
+        for(MapObject object: map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / CreatingBeauty.getPPM(), (rect.getY() + rect.getHeight() / 2) / CreatingBeauty.getPPM());
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2 / CreatingBeauty.getPPM(), rect.getHeight() / 2 / CreatingBeauty.getPPM());
+            fdef.shape = shape;
+            fdef.filter.categoryBits = CreatingBeauty.ABYSS_BIT;
             body.createFixture(fdef);
         }
     }
