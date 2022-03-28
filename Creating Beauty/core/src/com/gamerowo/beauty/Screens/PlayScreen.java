@@ -110,7 +110,7 @@ public class PlayScreen implements Screen {
                 player.setDashesRemaining(player.getDashesRemaining()-1);
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.BACKSLASH)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.M)){
             CreatingBeauty.currentLevel++;
             startLevel();
         }

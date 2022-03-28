@@ -34,12 +34,9 @@ public class WorldContactListener implements ContactListener {
                         ((Player) fixA.getUserData()).hit((Enemy) fixB.getUserData());
                 break;
             case CreatingBeauty.ENEMY_BIT | CreatingBeauty.OBJECT_BIT:
-                System.out.println("a hit");
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.ENEMY_BIT){
-                    System.out.println("a hit");
                     ((Enemy) fixA.getUserData()).reverseVelocity(true, false);}
                 else{
-                    System.out.println("b hit");
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);}
                 break;
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.ENEMY_BIT:

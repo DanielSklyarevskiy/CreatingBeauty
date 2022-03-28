@@ -16,9 +16,9 @@ public class Hud implements Disposable {
     private Stage stage;
     private Viewport viewport;
 
-    private Integer worldTimer;
+    private static Integer worldTimer = 0;
     private float timeCount;
-    private static Integer score;
+    private static Integer score = 0;
 
     private Label countDownLabel;
     private static Label scoreLabel;
@@ -28,9 +28,8 @@ public class Hud implements Disposable {
     private Label livesLabel;
 
     public Hud(SpriteBatch sb){
-        worldTimer = 300;
         timeCount = 0;
-        score = 0;
+        //score = 0;
 
         viewport = new FitViewport(CreatingBeauty.getWorldWidth(), CreatingBeauty.getWorldHeight(), new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -42,9 +41,9 @@ public class Hud implements Disposable {
         countDownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label(String.format("TIME", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));;
-        levelLabel = new Label(String.format("1-1", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));;
-        worldLabel = new Label(String.format("WORLD", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));;
-        livesLabel = new Label(String.format("LIVES", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));;
+        //levelLabel = new Label(String.format("1-1", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));;
+        //worldLabel = new Label(String.format("WORLD", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));;
+        livesLabel = new Label(String.format("SCORE", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));;
 
         table.add(livesLabel).expandX().padTop(5);
         table.add(worldLabel).expandX().padTop(5);
@@ -60,7 +59,7 @@ public class Hud implements Disposable {
     public void update(float dt){
         timeCount += dt;
         if(timeCount >= 1){
-            worldTimer--;
+            worldTimer++;
             countDownLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }

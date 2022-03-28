@@ -49,7 +49,7 @@ public class Player extends Sprite {
         previousState = State.STANDING;
         stateTimer = 0;
         runningRight = true;
-        jumpsRemaining = 100000;
+        jumpsRemaining = 1;
         dashesRemaining = 2;
         dashSpeed = 1.3f;
 
