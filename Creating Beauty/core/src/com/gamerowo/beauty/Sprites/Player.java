@@ -23,6 +23,7 @@ public class Player extends Sprite {
     public State currentState;
     public State previousState;
     private World world;
+    private PlayScreen screen;
     private Body b2Body;
     private final TextureRegion aamirahStand;
     private final TextureRegion aamirahDead;
@@ -43,6 +44,7 @@ public class Player extends Sprite {
     public Player(PlayScreen screen){
         super(screen.getPlayerAtlas().findRegion("PlayerAnimations"));
         this.world = screen.getWorld();
+        this.screen = screen;
         currentState = State.STANDING;
         previousState = State.STANDING;
         stateTimer = 0;
@@ -185,7 +187,7 @@ public class Player extends Sprite {
         }
     }
     public void die(){
-        CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class).stop();
+        screen.getMusic().stop();
         CreatingBeauty.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
         isDead = true;
         Filter filter = new Filter();

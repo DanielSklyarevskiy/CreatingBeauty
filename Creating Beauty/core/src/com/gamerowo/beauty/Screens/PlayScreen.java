@@ -124,7 +124,7 @@ public class PlayScreen implements Screen {
         player.update(dt);
         for (Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
-            if(enemy.getX() < player.getX() + 224 / CreatingBeauty.getPPM())
+            //if(enemy.getX() < player.getX() + 224 / CreatingBeauty.getPPM())
                 enemy.b2Body.setActive(true);
         }
         hud.update(dt);
@@ -142,13 +142,19 @@ public class PlayScreen implements Screen {
     }
 
     public void startLevel(){
+        if(music != null) {
+            music.stop();
+        }
         if(CreatingBeauty.currentLevel == 0) {
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Mario.tmx");
+            music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
+
         }
-        else if(CreatingBeauty.currentLevel == 1) {
+        else if(CreatingBeauty.currentLevel > 0) {
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Kirby.tmx");
+            music = CreatingBeauty.manager.get("audio/music/kirby_music.mp3", Music.class);
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / CreatingBeauty.getPPM());
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
@@ -161,7 +167,6 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
         music.setLooping(true);
         music.setVolume(0.1f);
         music.play();
@@ -241,5 +246,9 @@ public class PlayScreen implements Screen {
         world.dispose();
         b2dr.dispose();
         hud.dispose();
+    }
+
+    public Music getMusic() {
+        return music;
     }
 }
