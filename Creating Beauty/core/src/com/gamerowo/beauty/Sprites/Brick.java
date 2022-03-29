@@ -18,7 +18,6 @@ public class Brick extends InteractiveTileObject{
 
     @Override
     public void onHeadHit() {
-        Gdx.app.log("Brick", "Collision");
         setCategoryFilter(CreatingBeauty.DESTROYED_BIT);
         getCell().setTile(null);
         Hud.addScore(100);

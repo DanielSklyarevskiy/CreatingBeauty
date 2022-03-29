@@ -95,7 +95,7 @@ public class B2WorldCreator {
         checkpoints = new Array<Checkpoint>();
         for(MapObject object: map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            checkpoints.add(new Checkpoint(screen, rect, player));
+            checkpoints.add(new Checkpoint(screen, rect));
         }
         //tops
         for(MapObject object: map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)){

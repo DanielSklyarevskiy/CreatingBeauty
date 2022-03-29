@@ -1,6 +1,7 @@
 package com.gamerowo.beauty.Sprites;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -16,12 +17,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.gamerowo.beauty.CreatingBeauty;
 import com.gamerowo.beauty.Screens.PlayScreen;
 
-public abstract class InteractiveTileObject {
+public abstract class InteractiveTileObject extends Sprite {
     protected World world;
     protected TiledMap map;
     protected TiledMapTile tile;
     protected Rectangle bounds;
     protected Body body;
+    protected PlayScreen screen;
 
     protected Fixture fixture;
 
@@ -29,6 +31,7 @@ public abstract class InteractiveTileObject {
         this.world = screen.getWorld();
         this.map = screen.getMap();
         this.bounds = bounds;
+        this.screen = screen;
 
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();

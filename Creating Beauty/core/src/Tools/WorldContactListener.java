@@ -47,6 +47,7 @@ public class WorldContactListener implements ContactListener {
                 break;
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.BRICK_BIT:
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.COIN_BIT:
+            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.CHECKPOINT_BIT:
                 if(fixA.getUserData() == "head" || fixB.getUserData() == "head"){
                     Fixture head = fixA.getUserData() == "head" ? fixA : fixB;
                     Fixture object = head == fixA ? fixB : fixA;

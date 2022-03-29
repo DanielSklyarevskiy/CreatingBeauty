@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -19,6 +20,7 @@ import com.gamerowo.beauty.CreatingBeauty;
 
 import com.gamerowo.beauty.Scenes.Hud;
 
+import com.gamerowo.beauty.Sprites.Checkpoint;
 import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.Player;
 import com.gamerowo.beauty.Sprites.Refresher;
@@ -47,6 +49,7 @@ public class PlayScreen implements Screen {
 
     //sprites
     private Player player;
+    public Texture checkpointTexture;
 
     private Music music;
 
@@ -145,6 +148,7 @@ public class PlayScreen implements Screen {
             music.stop();
         }
         if(CreatingBeauty.currentLevel == 0) {
+            checkpointTexture = new Texture("beauty/b.png");
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Mario.tmx");
             music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
@@ -152,13 +156,13 @@ public class PlayScreen implements Screen {
         }
         else if(CreatingBeauty.currentLevel == 1) {
             mapLoader = new TmxMapLoader();
-            map = mapLoader.load("Kirby.tmx");
-            music = CreatingBeauty.manager.get("audio/music/kirby_music.mp3", Music.class);
+            map = mapLoader.load("Mario3.tmx");
+            music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
         }
         else if(CreatingBeauty.currentLevel == 2) {
             mapLoader = new TmxMapLoader();
-            map = mapLoader.load("Mario3.tmx");
-            music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
+            map = mapLoader.load("Kirby.tmx");
+            music = CreatingBeauty.manager.get("audio/music/kirby_music.mp3", Music.class);
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / CreatingBeauty.getPPM());
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
@@ -192,6 +196,8 @@ public class PlayScreen implements Screen {
         player.draw(game.getBatch());
         for (Enemy enemy : creator.getEnemies())
             enemy.draw(game.getBatch());
+        for (Checkpoint checkpoint : creator.getCheckpoints())
+            checkpoint.draw(game.getBatch());
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);
@@ -255,4 +261,5 @@ public class PlayScreen implements Screen {
     public Music getMusic() {
         return music;
     }
+
 }
