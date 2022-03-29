@@ -49,7 +49,7 @@ public class PlayScreen implements Screen {
 
     //sprites
     private Player player;
-    public Texture checkpointTexture;
+    public Texture checkpointTexture = new Texture("beauty/b.png");;
 
     private Music music;
 
@@ -127,7 +127,7 @@ public class PlayScreen implements Screen {
         player.update(dt);
         for (Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
-                enemy.b2Body.setActive(true);
+            enemy.b2Body.setActive(true);
         }
         hud.update(dt);
         for (Refresher refresher : creator.getRefreshers()){
@@ -155,11 +155,13 @@ public class PlayScreen implements Screen {
 
         }
         else if(CreatingBeauty.currentLevel == 1) {
+            checkpointTexture = new Texture("beauty/e.png");
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Mario3.tmx");
-            music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
+            music = CreatingBeauty.manager.get("audio/music/mario_3_music.mp3", Music.class);
         }
         else if(CreatingBeauty.currentLevel == 2) {
+            checkpointTexture = new Texture("beauty/a.png");
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Kirby.tmx");
             music = CreatingBeauty.manager.get("audio/music/kirby_music.mp3", Music.class);
@@ -189,15 +191,16 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 
-        b2dr.render(world, cam.combined);
+        //b2dr.render(world, cam.combined);
 
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
         player.draw(game.getBatch());
         for (Enemy enemy : creator.getEnemies())
             enemy.draw(game.getBatch());
-        for (Checkpoint checkpoint : creator.getCheckpoints())
-            checkpoint.draw(game.getBatch());
+        for (Checkpoint checkpoint : creator.getCheckpoints()) {
+            game.getBatch().draw(checkpointTexture, checkpoint.boundX/ CreatingBeauty.getPPM(), checkpoint.boundY/ CreatingBeauty.getPPM(), 0.3f, 0.3f);
+        }
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);

@@ -10,19 +10,21 @@ import com.gamerowo.beauty.Screens.PlayScreen;
 
 
 public class Checkpoint extends InteractiveTileObject{
-    private Texture texture;
+    public float boundX;
+    public float boundY;
 
     public Checkpoint(PlayScreen screen, Rectangle bounds){
         super(screen, bounds);
+        boundX = bounds.getX() - bounds.getHeight() / 2;
+        boundY = bounds.getY() - bounds.getWidth() / 2;
         fixture.setUserData(this);
         setCategoryFilter(CreatingBeauty.CHECKPOINT_BIT);
     }
 
     @Override
     public void onHeadHit() {
-        Gdx.app.log("Brick", "Collision");
         screen.getMusic().stop();
-        CreatingBeauty.manager.get("audio/sounds/levelComplete.mp3", Sound.class).play();
+        //CreatingBeauty.manager.get("audio/sounds/levelComplete.mp3", Sound.class).play();
         CreatingBeauty.currentLevel++;
         screen.startLevel();
     }

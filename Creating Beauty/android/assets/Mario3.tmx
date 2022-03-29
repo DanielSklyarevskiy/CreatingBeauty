@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="64">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="65">
  <tileset firstgid="1" source="mario3_tileset.tsx"/>
  <layer id="1" name="background" width="240" height="13">
   <data encoding="csv">
@@ -79,7 +79,9 @@
   <object id="52" x="2175.5" y="310.5"/>
  </objectgroup>
  <objectgroup id="8" name="refreshers"/>
- <objectgroup id="9" name="checkpoints"/>
+ <objectgroup id="9" name="checkpoints">
+  <object id="64" x="208" y="96" width="16" height="16"/>
+ </objectgroup>
  <objectgroup id="10" name="top">
   <object id="24" x="192" y="176" width="160"/>
   <object id="25" x="352" y="128" width="48"/>

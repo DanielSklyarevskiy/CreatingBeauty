@@ -103,7 +103,6 @@ public class B2WorldCreator {
 
             bdef.type = BodyDef.BodyType.StaticBody;
             bdef.position.set((rect.getX() + rect.getWidth() / 2) / CreatingBeauty.getPPM(), (rect.getY() + rect.getHeight() / 2) / CreatingBeauty.getPPM());
-
             body = world.createBody(bdef);
 
             shape.setAsBox(rect.getWidth() / 2 / CreatingBeauty.getPPM(), rect.getHeight() / 2 / CreatingBeauty.getPPM());
