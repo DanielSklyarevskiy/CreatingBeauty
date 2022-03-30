@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="452">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="466">
  <tileset firstgid="1" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
   <image source="tileset_gutter.png" width="594" height="504"/>
  </tileset>
@@ -40,6 +40,8 @@
   <object id="438" x="2912" y="64" width="16" height="16"/>
   <object id="444" x="3056" y="48" width="16" height="16"/>
   <object id="447" x="3248" y="96" width="48" height="16"/>
+  <object id="459" x="1664" y="144" width="64" height="16"/>
+  <object id="461" x="1824" y="160" width="32" height="16"/>
  </objectgroup>
  <objectgroup id="4" name="pipes">
   <object id="105" x="608" y="160" width="32" height="32"/>
@@ -57,9 +59,6 @@
   <object id="290" x="2512" y="128" width="16" height="16"/>
   <object id="291" x="2368" y="144" width="16" height="16"/>
   <object id="292" x="2240" y="144" width="16" height="16"/>
-  <object id="293" x="1648" y="160" width="96" height="16"/>
-  <object id="294" x="1664" y="144" width="64" height="16"/>
-  <object id="296" x="1808" y="160" width="64" height="16"/>
   <object id="347" x="3328" y="32" width="16" height="128"/>
   <object id="348" x="3264" y="112" width="16" height="48"/>
   <object id="349" x="3360" y="128" width="16" height="32"/>
@@ -87,6 +86,10 @@
   <object id="446" x="3040" y="48" width="16" height="16"/>
   <object id="448" x="3296" y="96" width="16" height="16"/>
   <object id="449" x="3232" y="96" width="16" height="16"/>
+  <object id="462" x="1856" y="160" width="16" height="16"/>
+  <object id="463" x="1808" y="160" width="16" height="16"/>
+  <object id="464" x="1728" y="160" width="16" height="16"/>
+  <object id="465" x="1648" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="coins">
   <object id="141" x="1040" y="64" width="16" height="16"/>
@@ -182,12 +185,10 @@
   <object id="176" x="864" y="176" width="16" height="16"/>
   <object id="179" x="672" y="176" width="16" height="16"/>
   <object id="183" x="1616" y="160" width="16" height="16"/>
-  <object id="184" x="1696" y="144" width="16" height="16" rotation="180"/>
-  <object id="185" x="1824" y="144" width="16" height="16"/>
+  <object id="184" x="1776" y="160" width="16" height="16" rotation="180"/>
+  <object id="185" x="1792" y="144" width="16" height="16"/>
   <object id="259" x="2496" y="128" width="16" height="16"/>
   <object id="266" x="2080" y="128" width="16" height="16"/>
-  <object id="297" x="2928" y="64" width="16" height="16" rotation="180"/>
-  <object id="300" x="3072" y="48" width="16" height="16" rotation="180"/>
   <object id="304" x="3424" y="48" width="16" height="16"/>
   <object id="399" x="2973.33" y="282" width="27.6667" height="2"/>
   <object id="419" x="432" y="176" width="16" height="16"/>
@@ -201,14 +202,13 @@
   <object id="182" x="1904" y="160" width="16" height="16"/>
   <object id="262" x="2288" y="144" width="16" height="16"/>
   <object id="263" x="2320" y="144" width="16" height="16"/>
-  <object id="264" x="2176" y="64" width="16" height="16"/>
   <object id="265" x="2016" y="128" width="16" height="16"/>
   <object id="305" x="3280" y="80" width="16" height="16"/>
   <object id="306" x="3248" y="80" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="10" name="refreshers"/>
  <objectgroup id="11" name="checkpoints">
-  <object id="451" x="256" y="96" width="16" height="16"/>
+  <object id="454" x="3584" y="96" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="13" name="top">
   <object id="91" x="0" y="192" width="736"/>

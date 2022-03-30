@@ -50,6 +50,7 @@ public class PlayScreen implements Screen {
     //sprites
     private Player player;
     public Texture checkpointTexture = new Texture("beauty/b.png");;
+    public Texture refresherTexture = new Texture("refresher.png");;
 
     private Music music;
 
@@ -131,7 +132,7 @@ public class PlayScreen implements Screen {
         }
         hud.update(dt);
         for (Refresher refresher : creator.getRefreshers()){
-            refresher.update(dt);
+            refresher.update(dt, game.getBatch());
         }
 
         if(player.currentState != Player.State.DEAD){
@@ -158,13 +159,19 @@ public class PlayScreen implements Screen {
             checkpointTexture = new Texture("beauty/e.png");
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Mario3.tmx");
-            music = CreatingBeauty.manager.get("audio/music/mario_3_music.mp3", Music.class);
+            music = CreatingBeauty.manager.get("audio/music/mario_three_music.mp3", Music.class);
         }
         else if(CreatingBeauty.currentLevel == 2) {
             checkpointTexture = new Texture("beauty/a.png");
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Kirby.tmx");
             music = CreatingBeauty.manager.get("audio/music/kirby_music.mp3", Music.class);
+        }
+        else if(CreatingBeauty.currentLevel == 3) {
+            checkpointTexture = new Texture("beauty/t.png");
+            mapLoader = new TmxMapLoader();
+            map = mapLoader.load("Cave.tmx");
+            music = CreatingBeauty.manager.get("audio/music/cave_music.mp3", Music.class);
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / CreatingBeauty.getPPM());
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
@@ -200,6 +207,11 @@ public class PlayScreen implements Screen {
             enemy.draw(game.getBatch());
         for (Checkpoint checkpoint : creator.getCheckpoints()) {
             game.getBatch().draw(checkpointTexture, checkpoint.boundX/ CreatingBeauty.getPPM(), checkpoint.boundY/ CreatingBeauty.getPPM(), 0.3f, 0.3f);
+        }
+        for (Refresher refresher: creator.getRefreshers()){
+            if(refresher.isActive()) {
+                game.getBatch().draw(refresherTexture, refresher.boundX / CreatingBeauty.getPPM(), refresher.boundY / CreatingBeauty.getPPM(), 0.2f, 0.2f);
+            }
         }
         game.getBatch().end();
 

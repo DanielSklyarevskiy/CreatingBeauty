@@ -75,8 +75,8 @@ public class Goomba extends Enemy{
         Vector2[] vertice = new Vector2[4];
         vertice[0] = new Vector2(-5, 8).scl(1 / CreatingBeauty.getPPM());
         vertice[1] = new Vector2(5, 8).scl(1 / CreatingBeauty.getPPM());
-        vertice[2] = new Vector2(-3, 3).scl(1 / CreatingBeauty.getPPM());
-        vertice[3] = new Vector2(3, 3).scl(1 / CreatingBeauty.getPPM());
+        vertice[2] = new Vector2(-4, 3).scl(1 / CreatingBeauty.getPPM());
+        vertice[3] = new Vector2(4, 3).scl(1 / CreatingBeauty.getPPM());
         head.set(vertice);
 
         fDef.shape = head;

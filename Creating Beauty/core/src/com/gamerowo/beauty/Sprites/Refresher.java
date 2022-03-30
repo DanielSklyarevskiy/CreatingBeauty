@@ -1,6 +1,8 @@
 package com.gamerowo.beauty.Sprites;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
 import com.gamerowo.beauty.CreatingBeauty;
@@ -10,29 +12,32 @@ import com.gamerowo.beauty.Screens.PlayScreen;
 public class Refresher extends InteractiveTileObject{
     private Player player;
     private boolean isActive = true;
-    private TiledMapTileSet set;
+    private Texture texture;
     public float refresherTimeCount;
 
-    private final int BLANK_COIN = 28;
+    public float boundX;
+    public float boundY;
 
     public Refresher(PlayScreen screen, Rectangle bounds, Player player){
         super(screen, bounds);
-        set = map.getTileSets().getTileSet("tileset_gutter");
+        texture = new Texture("refresher.png");
         fixture.setUserData(this);
         setCategoryFilter(CreatingBeauty.REFRESHER_BIT);
         this.player = player;
+
+        boundX = bounds.getX() - bounds.getHeight() / 2;
+        boundY = bounds.getY() - bounds.getWidth() / 2;
     }
 
     @Override
     public void onHeadHit() {
     }
 
-    public void update(float dt){
+    public void update(float dt, SpriteBatch batch){
         if(refresherTimeCount <= 3) refresherTimeCount += dt;
         else if (!isActive){
             isActive = true;
             setCategoryFilter(CreatingBeauty.REFRESHER_BIT);
-            getCell().setTile(set.getTile(BLANK_COIN));
         }
     }
 
@@ -44,11 +49,8 @@ public class Refresher extends InteractiveTileObject{
     public boolean isActive() {
         return isActive;
     }
+
     public void setIsActive(boolean s){
         isActive = s;
-    }
-
-    public TiledMapTileSet getSet() {
-        return set;
     }
 }

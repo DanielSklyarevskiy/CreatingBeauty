@@ -30,7 +30,7 @@ public class CreatingBeauty extends Game {
 	private SpriteBatch batch;
 
 	public static AssetManager manager;
-	public static int currentLevel;
+	public static int currentLevel = 3;
 
 	@Override
 	public void create () {
@@ -38,7 +38,8 @@ public class CreatingBeauty extends Game {
 		manager = new AssetManager();
 		manager.load("audio/music/mario_music.ogg", Music.class);
 		manager.load("audio/music/kirby_music.mp3", Music.class);
-		manager.load("audio/music/mario_3_music.mp3", Music.class);
+		manager.load("audio/music/mario_three_music.mp3", Music.class);
+		manager.load("audio/music/cave_music.mp3", Music.class);
 		manager.load("audio/sounds/coin.wav", Sound.class);
 		manager.load("audio/sounds/bump.wav", Sound.class);
 		manager.load("audio/sounds/breakblock.wav", Sound.class);
