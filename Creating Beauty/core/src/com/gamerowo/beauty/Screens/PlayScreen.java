@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -177,7 +178,13 @@ public class PlayScreen implements Screen {
             checkpointTexture = new Texture("beauty/y.png");
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Kirby2.tmx");
-            music = CreatingBeauty.manager.get("audio/music/kirby_music.mp3", Music.class);
+            music = CreatingBeauty.manager.get("audio/music/robobot.mp3", Music.class);
+        }
+        else if(CreatingBeauty.currentLevel == 5) {
+            checkpointTexture = new Texture("beauty/croissant.png");
+            mapLoader = new TmxMapLoader();
+            map = mapLoader.load("Finalle.tmx");
+            music = CreatingBeauty.manager.get("audio/music/sans.mp3", Music.class);
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / CreatingBeauty.getPPM());
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
@@ -188,7 +195,7 @@ public class PlayScreen implements Screen {
         player = new Player(this);
         creator = new B2WorldCreator(this, player);
 
-        world.setContactListener(new WorldContactListener());
+        world.setContactListener(new WorldContactListener(player));
 
         music.setLooping(true);
         music.setVolume(0.1f);

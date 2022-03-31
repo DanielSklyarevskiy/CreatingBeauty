@@ -1,5 +1,6 @@
 package com.gamerowo.beauty.Sprites;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -36,6 +37,7 @@ public class Goomba extends Enemy{
     public void update(float dt){
         stateTime += dt;
         if(setToDestroy && !destroyed){
+            CreatingBeauty.manager.get("audio/sounds/goomba_sound.mp3", Sound.class).play();
             world.destroyBody(b2Body);
             destroyed = true;
             setRegion(new TextureRegion(screen.getMarioAtlas().findRegion("goomba"), 32, 0, 16, 16));
