@@ -34,7 +34,7 @@ public class GameOverScreen implements Screen {
         table.setFillParent(true);
 
         Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Press any key to restart", font);
+        Label playAgainLabel = new Label("Press any key to restart level", font);
 
         table.add(gameOverLabel).expandX();
         table.row();

@@ -33,7 +33,7 @@ public class GameStartScreen implements Screen{
         table.setFillParent(true);
 
         Label gameStartLabel = new Label("Creating Beauty", font);
-        Label playGameLabel = new Label("Press space to start and R for the rules", font);
+        Label playGameLabel = new Label("Press space to start and R for the controls", font);
 
         table.add(gameStartLabel).expandX();
         table.row();
