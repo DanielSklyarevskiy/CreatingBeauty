@@ -22,6 +22,7 @@ import com.gamerowo.beauty.Scenes.Hud;
 
 import com.gamerowo.beauty.Sprites.Checkpoint;
 import com.gamerowo.beauty.Sprites.Enemy;
+import com.gamerowo.beauty.Sprites.Holmer;
 import com.gamerowo.beauty.Sprites.Player;
 import com.gamerowo.beauty.Sprites.Refresher;
 
@@ -51,6 +52,7 @@ public class PlayScreen implements Screen {
     private Player player;
     public Texture checkpointTexture = new Texture("beauty/b.png");;
     public Texture refresherTexture = new Texture("refresher.png");;
+    public Texture holmerTexture = new Texture("Holmer.png");
 
     private Music music;
 
@@ -134,7 +136,6 @@ public class PlayScreen implements Screen {
         for (Refresher refresher : creator.getRefreshers()){
             refresher.update(dt, game.getBatch());
         }
-
         if(player.currentState != Player.State.DEAD){
             cam.position.x = player.getB2Body().getPosition().x;
         }
@@ -153,7 +154,6 @@ public class PlayScreen implements Screen {
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Mario.tmx");
             music = CreatingBeauty.manager.get("audio/music/mario_music.ogg", Music.class);
-
         }
         else if(CreatingBeauty.currentLevel == 1) {
             checkpointTexture = new Texture("beauty/e.png");
@@ -172,6 +172,12 @@ public class PlayScreen implements Screen {
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Cave.tmx");
             music = CreatingBeauty.manager.get("audio/music/cave_music.mp3", Music.class);
+        }
+        else if(CreatingBeauty.currentLevel == 4) {
+            checkpointTexture = new Texture("beauty/y.png");
+            mapLoader = new TmxMapLoader();
+            map = mapLoader.load("Kirby2.tmx");
+            music = CreatingBeauty.manager.get("audio/music/kirby_music.mp3", Music.class);
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / CreatingBeauty.getPPM());
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
@@ -198,11 +204,10 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 
-        //b2dr.render(world, cam.combined);
+        b2dr.render(world, cam.combined);
 
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
-        player.draw(game.getBatch());
         for (Enemy enemy : creator.getEnemies())
             enemy.draw(game.getBatch());
         for (Checkpoint checkpoint : creator.getCheckpoints()) {
@@ -213,6 +218,7 @@ public class PlayScreen implements Screen {
                 game.getBatch().draw(refresherTexture, refresher.boundX / CreatingBeauty.getPPM(), refresher.boundY / CreatingBeauty.getPPM(), 0.2f, 0.2f);
             }
         }
+        player.draw(game.getBatch());
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);
