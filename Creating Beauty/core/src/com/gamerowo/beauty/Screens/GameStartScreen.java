@@ -2,6 +2,7 @@ package com.gamerowo.beauty.Screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -31,8 +32,8 @@ public class GameStartScreen implements Screen{
         table.center();
         table.setFillParent(true);
 
-        Label gameStartLabel = new Label("Start game", font);
-        Label playGameLabel = new Label("Click to start", font);
+        Label gameStartLabel = new Label("Creating Beauty", font);
+        Label playGameLabel = new Label("Press space to start and R for the rules", font);
 
         table.add(gameStartLabel).expandX();
         table.row();
@@ -58,9 +59,10 @@ public class GameStartScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            game.setScreen(new ControlsScreen((CreatingBeauty) game));
+        }else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             game.setScreen(new PlayScreen((CreatingBeauty) game));
-            //PlayScreen.setGameStart(true);
         }
         //dispose();
         Gdx.gl.glClearColor(0, 0, 0, 1);

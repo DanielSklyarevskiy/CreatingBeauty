@@ -16,13 +16,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamerowo.beauty.CreatingBeauty;
 
 
-public class GameOverScreen implements Screen {
+public class ControlsScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
 
     private Game game;
 
-    public GameOverScreen(Game game){
+    public ControlsScreen(Game game){
         this.game = game;
         viewport = new FitViewport(CreatingBeauty.getWorldWidth(), CreatingBeauty.getWorldHeight(), new OrthographicCamera());
         stage = new Stage(viewport, ((CreatingBeauty) game).getBatch());
@@ -33,12 +33,18 @@ public class GameOverScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Press any key to restart", font);
+        Label l1 = new Label("Controls", font);
+        Label l2 = new Label("Moving: Arrow Keys\nJump: Z\nSwitch characters: X\nSprint: C", font);
+        Label l3 = new Label("NOTE: Aamirah can kill enemies but can't sprint,\nand Danny can sprint but not kill enemies.", font);
+        Label l4 = new Label("Press R to return to title", font);
 
-        table.add(gameOverLabel).expandX();
+        table.add(l1).expandX();
         table.row();
-        table.add(playAgainLabel).expandX().padTop(10f);
+        table.add(l2).expandX().padTop(10f);
+        table.row();
+        table.add(l3).expandX().padTop(10f);
+        table.row();
+        table.add(l4).expandX().padTop(10f);
 
         stage.addActor(table);
     }
@@ -51,7 +57,7 @@ public class GameOverScreen implements Screen {
     @Override
     public void render(float delta) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
-            game.setScreen(new PlayScreen((CreatingBeauty) game));
+            game.setScreen(new GameStartScreen((CreatingBeauty) game));
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
