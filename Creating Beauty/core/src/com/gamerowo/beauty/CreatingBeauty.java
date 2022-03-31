@@ -1,12 +1,17 @@
 package com.gamerowo.beauty;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gamerowo.beauty.Screens.Cutscene;
 import com.gamerowo.beauty.Screens.GameStartScreen;
 import com.gamerowo.beauty.Screens.PlayScreen;
+import java.util.*;
 
 public class CreatingBeauty extends Game {
 	private static final int WORLD_WIDTH = 400;
@@ -45,10 +50,11 @@ public class CreatingBeauty extends Game {
 		manager.load("audio/sounds/breakblock.wav", Sound.class);
 		manager.load("audio/sounds/mariodie.wav", Sound.class);
 		manager.load("audio/sounds/levelComplete.mp3", Sound.class);
+		
 
 		manager.finishLoading();
 
-		setScreen(new GameStartScreen(this));
+		setScreen(new Cutscene(this));
 	}
 
 	@Override

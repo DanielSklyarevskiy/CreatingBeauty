@@ -63,6 +63,7 @@ public class GameStartScreen implements Screen{
             game.setScreen(new ControlsScreen((CreatingBeauty) game));
         }else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             game.setScreen(new PlayScreen((CreatingBeauty) game));
+            //game.setScreen(new Cutscene((CreatingBeauty) game));
         }
         //dispose();
         Gdx.gl.glClearColor(0, 0, 0, 1);
