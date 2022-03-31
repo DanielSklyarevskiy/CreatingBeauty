@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gamerowo.beauty.Screens.Cutscene;
+import com.gamerowo.beauty.Screens.EndScreen;
 import com.gamerowo.beauty.Screens.GameStartScreen;
 import com.gamerowo.beauty.Screens.PlayScreen;
 import java.util.*;
@@ -55,7 +56,7 @@ public class CreatingBeauty extends Game {
 
 		manager.finishLoading();
 
-		setScreen(new Cutscene(this));
+		setScreen(new EndScreen(this));
 	}
 
 	@Override
