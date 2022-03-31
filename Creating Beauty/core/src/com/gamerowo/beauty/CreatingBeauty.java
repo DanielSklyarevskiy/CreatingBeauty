@@ -56,7 +56,17 @@ public class CreatingBeauty extends Game {
 		manager.load("audio/sounds/breakblock.wav", Sound.class);
 		manager.load("audio/sounds/mariodie.wav", Sound.class);
 		manager.load("audio/sounds/levelComplete.mp3", Sound.class);
-		
+		manager.load("audio/voices/0000.mp3", Sound.class);
+		manager.load("audio/voices/0001.mp3", Sound.class);
+		manager.load("audio/voices/0002.mp3", Sound.class);
+		manager.load("audio/voices/0003.mp3", Sound.class);
+		manager.load("audio/voices/0100.mp3", Sound.class);
+		manager.load("audio/voices/0101.mp3", Sound.class);
+		manager.load("audio/voices/0102.mp3", Sound.class);
+		manager.load("audio/voices/0103.mp3", Sound.class);
+		manager.load("audio/voices/0104.mp3", Sound.class);
+		manager.load("audio/voices/0105.mp3", Sound.class);
+		manager.load("audio/voices/0106.mp3", Sound.class);
 
 		manager.finishLoading();
 

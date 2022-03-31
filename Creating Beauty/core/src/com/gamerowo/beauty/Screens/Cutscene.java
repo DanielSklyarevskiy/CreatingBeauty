@@ -4,17 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamerowo.beauty.CreatingBeauty;
@@ -35,9 +30,22 @@ public class Cutscene implements Screen{
                                       new Texture(Gdx.files.internal("CutscenePictures/HolmerShocked.jpg")),
 									  new Texture(Gdx.files.internal("CutscenePictures/HolmerBeauty.jpg")),
 									  new Texture(Gdx.files.internal("CutscenePictures/GodJing.jpg"))};
-
+	public static int sceneIndex = 0;
+    public static int voiceIndex = 0;
+    public static Sound[][] voicelines = {{ CreatingBeauty.manager.get("audio/voices/0000.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0001.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0002.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0003.mp3", Sound.class)},
+                                           {CreatingBeauty.manager.get("audio/voices/0100.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0101.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0102.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0103.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0104.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0105.mp3", Sound.class),
+                                            CreatingBeauty.manager.get("audio/voices/0106.mp3", Sound.class)}
+	};
     private Game game;
-    private Texture texsture = photos[photoIndex];
+    private Texture texture = photos[photoIndex];
     private SpriteBatch batch = new SpriteBatch();
 
     public Cutscene(Game game){
@@ -46,28 +54,12 @@ public class Cutscene implements Screen{
         viewport = new FitViewport(CreatingBeauty.getWorldWidth(),
                                         CreatingBeauty.getWorldHeight(), cam);
         stage = new Stage(viewport, ((CreatingBeauty) game).getBatch());
-
-        /*Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-
-        
-        //Label playGameLabel = new Label("Press space to start and R for the controls", font);
-
-        //table.add(texsture);
-        
-        table.row();
-        //table.add(playGameLabel).expandX().padTop(10f);
-
-        stage.addActor(table);*/
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        texsture.dispose();
+        texture.dispose();
     }
 
     @Override
@@ -86,11 +78,13 @@ public class Cutscene implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.setProjectionMatrix(cam.combined);
-        batch.draw(texsture, 0, 0, 40000 / CreatingBeauty.getPPM(), 22000 / CreatingBeauty.getPPM());
+        batch.draw(texture, 0, 0, 40000 / CreatingBeauty.getPPM(), 22000 / CreatingBeauty.getPPM());
         batch.end();
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-            photoIndex++;
-            game.setScreen(new Cutscene((CreatingBeauty) game));
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+            voicelines[sceneIndex][voiceIndex].play();
+            voiceIndex++;
+            //photoIndex++;
+            //game.setScreen(new Cutscene((CreatingBeauty) game));
         }
     }
 

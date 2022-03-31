@@ -34,8 +34,8 @@ public class ControlsScreen implements Screen {
         table.setFillParent(true);
 
         Label l1 = new Label("Controls", font);
-        Label l2 = new Label("Moving: Arrow Keys\nJump: Z\nSwitch characters: X\nSprint: C", font);
-        Label l3 = new Label("NOTE: Aamirah can kill enemies but can't sprint,\nand Danny can sprint but not kill enemies.", font);
+        Label l2 = new Label("Moving: Arrow Keys\nJump: Z\nSwitch characters: X\nDash: C", font);
+        Label l3 = new Label("NOTE: Aamirah can kill enemies but can't dash,\nand Danny can dash but not kill enemies.", font);
         Label l4 = new Label("Press R to return to title", font);
 
         table.add(l1).expandX();
