@@ -37,7 +37,7 @@ public class CreatingBeauty extends Game {
 	private SpriteBatch batch;
 
 	public static AssetManager manager;
-	public static int currentLevel = 0;
+	public static int currentLevel = -1;
 
 	@Override
 	public void create () {
@@ -67,6 +67,32 @@ public class CreatingBeauty extends Game {
 		manager.load("audio/voices/0104.mp3", Sound.class);
 		manager.load("audio/voices/0105.mp3", Sound.class);
 		manager.load("audio/voices/0106.mp3", Sound.class);
+		manager.load("audio/voices/0200.mp3", Sound.class);
+		manager.load("audio/voices/0201.mp3", Sound.class);
+		manager.load("audio/voices/0202.mp3", Sound.class);
+		manager.load("audio/voices/0203.mp3", Sound.class);
+		manager.load("audio/voices/0204.mp3", Sound.class);
+		manager.load("audio/voices/0205.mp3", Sound.class);
+		manager.load("audio/voices/0206.mp3", Sound.class);
+		manager.load("audio/voices/0207.mp3", Sound.class);
+		manager.load("audio/voices/0208.mp3", Sound.class);
+		manager.load("audio/voices/0300.mp3", Sound.class);
+		manager.load("audio/voices/0301.mp3", Sound.class);
+		manager.load("audio/voices/0302.mp3", Sound.class);
+		manager.load("audio/voices/0303.mp3", Sound.class);
+		manager.load("audio/voices/0304.mp3", Sound.class);
+		manager.load("audio/voices/0305.mp3", Sound.class);
+		manager.load("audio/voices/0306.mp3", Sound.class);
+		manager.load("audio/voices/0307.mp3", Sound.class);
+		manager.load("audio/voices/0308.mp3", Sound.class);
+		manager.load("audio/voices/0309.mp3", Sound.class);
+		manager.load("audio/voices/0310.mp3", Sound.class);
+		manager.load("audio/voices/0400.mp3", Sound.class);
+		manager.load("audio/voices/0401.mp3", Sound.class);
+		manager.load("audio/voices/0402.mp3", Sound.class);
+		manager.load("audio/voices/0403.mp3", Sound.class);
+		manager.load("audio/voices/0404.mp3", Sound.class);
+		manager.load("audio/voices/0405.mp3", Sound.class);
 
 		manager.finishLoading();
 

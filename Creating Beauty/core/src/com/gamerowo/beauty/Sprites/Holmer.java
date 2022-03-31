@@ -43,7 +43,6 @@ public class Holmer extends Enemy{
     @Override
     public void update(float dt) {
         b2Body.setLinearVelocity(velocity);
-        System.out.println(velocity);
         setPosition(b2Body.getPosition().x - getWidth() / 2, b2Body.getPosition().y - getHeight() / 2);
         setRegion(texture);
     }

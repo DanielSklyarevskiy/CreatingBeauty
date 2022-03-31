@@ -180,11 +180,19 @@ public class PlayScreen implements Screen {
             map = mapLoader.load("Kirby2.tmx");
             music = CreatingBeauty.manager.get("audio/music/robobot.mp3", Music.class);
         }
-        else if(CreatingBeauty.currentLevel == 5) {
+        else if(CreatingBeauty.currentLevel == 5){
+            music.stop();
+            game.setScreen(new Cutscene((CreatingBeauty) game));
+        }
+        else if(CreatingBeauty.currentLevel == 6) {
             checkpointTexture = new Texture("beauty/croissant.png");
             mapLoader = new TmxMapLoader();
             map = mapLoader.load("Finalle.tmx");
             music = CreatingBeauty.manager.get("audio/music/sans.mp3", Music.class);
+        }
+        else if(CreatingBeauty.currentLevel == 7){
+            music.stop();
+            game.setScreen(new Cutscene((CreatingBeauty) game));
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / CreatingBeauty.getPPM());
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
@@ -197,9 +205,11 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener(player));
 
-        music.setLooping(true);
-        music.setVolume(0.1f);
-        music.play();
+        if(CreatingBeauty.currentLevel != 5 && CreatingBeauty.currentLevel != 7) {
+            music.setLooping(true);
+            music.setVolume(0.1f);
+            music.play();
+        }
     }
 
     @Override
@@ -210,8 +220,6 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-
-        b2dr.render(world, cam.combined);
 
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();

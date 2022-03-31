@@ -42,7 +42,35 @@ public class Cutscene implements Screen{
                                             CreatingBeauty.manager.get("audio/voices/0103.mp3", Sound.class),
                                             CreatingBeauty.manager.get("audio/voices/0104.mp3", Sound.class),
                                             CreatingBeauty.manager.get("audio/voices/0105.mp3", Sound.class),
-                                            CreatingBeauty.manager.get("audio/voices/0106.mp3", Sound.class)}
+                                            CreatingBeauty.manager.get("audio/voices/0106.mp3", Sound.class)},
+                    {CreatingBeauty.manager.get("audio/sounds/bump.wav", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0200.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0201.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0202.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0203.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0204.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0205.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0206.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0207.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0208.mp3", Sound.class)},
+            {CreatingBeauty.manager.get("audio/sounds/bump.wav", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0300.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0301.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0302.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0303.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0304.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0305.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0306.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0307.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0308.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0309.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0310.mp3", Sound.class)},
+            {CreatingBeauty.manager.get("audio/voices/0400.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0401.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0402.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0403.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0404.mp3", Sound.class),
+                    CreatingBeauty.manager.get("audio/voices/0405.mp3", Sound.class)}
 	};
     private Game game;
     private Texture texture = photos[photoIndex];
@@ -81,10 +109,49 @@ public class Cutscene implements Screen{
         batch.draw(texture, 0, 0, 40000 / CreatingBeauty.getPPM(), 22000 / CreatingBeauty.getPPM());
         batch.end();
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-            voicelines[sceneIndex][voiceIndex].play();
-            voiceIndex++;
-            //photoIndex++;
-            //game.setScreen(new Cutscene((CreatingBeauty) game));
+                if (voiceIndex < voicelines[sceneIndex].length) {
+                    if (voicelines[sceneIndex][voiceIndex] != voicelines[sceneIndex][0])
+                        voicelines[sceneIndex][voiceIndex - 1].stop();
+                    voicelines[sceneIndex][voiceIndex].play();
+                } else {
+                    voicelines[sceneIndex][voiceIndex - 1].stop();
+                    sceneIndex++;
+                    voiceIndex = 0;
+                    voicelines[sceneIndex][voiceIndex].play();
+                }
+                if (voiceIndex < voicelines[sceneIndex].length &&
+                        (voicelines[sceneIndex][voiceIndex] == voicelines[0][3] ||
+                                voicelines[sceneIndex][voiceIndex] == voicelines[1][0] ||
+                                voicelines[sceneIndex][voiceIndex] == voicelines[1][2] ||
+                                voicelines[sceneIndex][voiceIndex] == voicelines[1][6] ||
+                                voicelines[sceneIndex][voiceIndex] == voicelines[2][4] ||
+                                voicelines[sceneIndex][voiceIndex] == voicelines[2][7] ||
+                                voicelines[sceneIndex][voiceIndex] == voicelines[3][1] ||
+                                voicelines[sceneIndex][voiceIndex] == voicelines[3][5]))
+                {
+                    photoIndex++;
+                    game.setScreen(new Cutscene((CreatingBeauty) game));
+                } else if (voiceIndex < voicelines[sceneIndex].length &&
+                        (voicelines[sceneIndex][voiceIndex] == voicelines[1][3] ||
+                                voicelines[sceneIndex][voiceIndex] == voicelines[4][0])) {
+                    photoIndex--;
+                    game.setScreen(new Cutscene((CreatingBeauty) game));
+                } else if (voiceIndex < voicelines[sceneIndex].length &&
+                        (voicelines[sceneIndex][voiceIndex] == voicelines[1][4])) {
+                    photoIndex += 2;
+                    game.setScreen(new Cutscene((CreatingBeauty) game));
+                }
+                if(voiceIndex < voicelines[sceneIndex].length && (voicelines[sceneIndex][voiceIndex] == voicelines[2][0] ||
+                        voicelines[sceneIndex][voiceIndex] == voicelines[3][0])){
+                    voicelines[sceneIndex][voiceIndex].stop();
+                    CreatingBeauty.currentLevel++;
+                    game.setScreen(new PlayScreen((CreatingBeauty) game));
+                }
+                if(voiceIndex < voicelines[sceneIndex].length && voicelines[sceneIndex][voiceIndex] == voicelines[4][5]){
+                    game.setScreen(new EndScreen((CreatingBeauty) game));
+                }
+                voiceIndex++;
+                System.out.println(sceneIndex + " " + voiceIndex);
         }
     }
 
