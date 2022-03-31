@@ -1,6 +1,5 @@
 package com.gamerowo.beauty.Sprites;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -74,7 +73,7 @@ public class Koopa extends Enemy{
         b2Body.createFixture(fDef).setUserData(this);
     }
 
-    public void onEnemyHit(Enemy enemy){
+    public void onEnemyHit(Enemy enemy){ //this doesn't work properly at all
         if(enemy instanceof Koopa){
             if(((Koopa) enemy).currentState == State.MOVING_SHELL && currentState != State.MOVING_SHELL){
                 killed();
@@ -153,7 +152,6 @@ public class Koopa extends Enemy{
     }
 
     public void kick(int speed){
-        CreatingBeauty.manager.get("audio/sounds/koopa_sound.mp3", Sound.class).play();
         velocity.x = speed;
         currentState = State.MOVING_SHELL;
     }
@@ -163,7 +161,6 @@ public class Koopa extends Enemy{
     }
 
     public void killed(){
-        CreatingBeauty.manager.get("audio/sounds/koopa_sound.mp3", Sound.class).play();
         Hud.addScore(700);
         currentState = State.DEAD;
         Filter filter = new Filter();

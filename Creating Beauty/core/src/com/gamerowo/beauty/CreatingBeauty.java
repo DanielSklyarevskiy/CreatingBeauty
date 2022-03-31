@@ -47,10 +47,6 @@ public class CreatingBeauty extends Game {
 		manager.load("audio/music/kirby_music.mp3", Music.class);
 		manager.load("audio/music/mario_three_music.mp3", Music.class);
 		manager.load("audio/music/cave_music.mp3", Music.class);
-		manager.load("audio/music/robobot.mp3", Music.class);
-		manager.load("audio/music/sans.mp3", Music.class);
-		manager.load("audio/sounds/goomba_sound.mp3", Sound.class);
-		manager.load("audio/sounds/koopa_sound.mp3", Sound.class);
 		manager.load("audio/sounds/coin.wav", Sound.class);
 		manager.load("audio/sounds/bump.wav", Sound.class);
 		manager.load("audio/sounds/breakblock.wav", Sound.class);

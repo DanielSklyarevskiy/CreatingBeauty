@@ -20,7 +20,8 @@ public class Holmer extends Enemy{
         super(screen, x, y);
         this.texture = texture;
         setBounds(getX(), getY(), 250 / CreatingBeauty.getPPM(), 250 / CreatingBeauty.getPPM());
-        velocity = new Vector2(1.6f, 0);
+        velocity = new Vector2(0.6f, 0);
+        //velocity = new Vector2(0, 50f);
     }
 
     @Override
