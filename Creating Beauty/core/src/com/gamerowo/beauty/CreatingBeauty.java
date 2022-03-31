@@ -56,7 +56,7 @@ public class CreatingBeauty extends Game {
 
 		manager.finishLoading();
 
-		setScreen(new EndScreen(this));
+		setScreen(new GameStartScreen(this));
 	}
 
 	@Override
