@@ -15,13 +15,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamerowo.beauty.CreatingBeauty;
 
-public class GameStartScreen implements Screen{
+
+public class ControlsScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
 
     private Game game;
 
-    public GameStartScreen(Game game){
+    public ControlsScreen(Game game){
         this.game = game;
         viewport = new FitViewport(CreatingBeauty.getWorldWidth(), CreatingBeauty.getWorldHeight(), new OrthographicCamera());
         stage = new Stage(viewport, ((CreatingBeauty) game).getBatch());
@@ -32,39 +33,32 @@ public class GameStartScreen implements Screen{
         table.center();
         table.setFillParent(true);
 
-        Label gameStartLabel = new Label("Creating Beauty", font);
-        Label playGameLabel = new Label("Press space to start and R for the controls", font);
+        Label l1 = new Label("Controls", font);
+        Label l2 = new Label("Moving: Arrow Keys\nJump: Z\nSwitch characters: X\nSprint: C", font);
+        Label l3 = new Label("NOTE: Aamirah can kill enemies but can't sprint,\nand Danny can sprint but not kill enemies.", font);
+        Label l4 = new Label("Press R to return to title", font);
 
-        table.add(gameStartLabel).expandX();
+        table.add(l1).expandX();
         table.row();
-        table.add(playGameLabel).expandX().padTop(10f);
+        table.add(l2).expandX().padTop(10f);
+        table.row();
+        table.add(l3).expandX().padTop(10f);
+        table.row();
+        table.add(l4).expandX().padTop(10f);
 
         stage.addActor(table);
     }
 
     @Override
-    public void dispose() {
-        stage.dispose();
-    }
+    public void show() {
 
-    @Override
-    public void hide() {
-        
-    }
-
-    @Override
-    public void pause() {
-        
     }
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            game.setScreen(new ControlsScreen((CreatingBeauty) game));
-        }else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-            game.setScreen(new PlayScreen((CreatingBeauty) game));
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
+            game.setScreen(new GameStartScreen((CreatingBeauty) game));
         }
-        //dispose();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
@@ -72,17 +66,26 @@ public class GameStartScreen implements Screen{
 
     @Override
     public void resize(int width, int height) {
-        
+
+    }
+
+    @Override
+    public void pause() {
+
     }
 
     @Override
     public void resume() {
-        
+
     }
 
     @Override
-    public void show() {
-        
+    public void hide() {
+
     }
 
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
 }

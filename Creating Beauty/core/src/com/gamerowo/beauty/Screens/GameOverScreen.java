@@ -34,7 +34,7 @@ public class GameOverScreen implements Screen {
         table.setFillParent(true);
 
         Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Press any key to restart", font);
+        Label playAgainLabel = new Label("Press any key to restart level", font);
 
         table.add(gameOverLabel).expandX();
         table.row();
@@ -52,7 +52,6 @@ public class GameOverScreen implements Screen {
     public void render(float delta) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
             game.setScreen(new PlayScreen((CreatingBeauty) game));
-            dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
