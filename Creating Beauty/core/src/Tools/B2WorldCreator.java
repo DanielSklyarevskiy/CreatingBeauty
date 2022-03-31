@@ -17,6 +17,7 @@ import com.gamerowo.beauty.Sprites.Checkpoint;
 import com.gamerowo.beauty.Sprites.Coin;
 import com.gamerowo.beauty.Sprites.Enemy;
 import com.gamerowo.beauty.Sprites.Goomba;
+import com.gamerowo.beauty.Sprites.Holmer;
 import com.gamerowo.beauty.Sprites.Koopa;
 import com.gamerowo.beauty.Sprites.Player;
 import com.gamerowo.beauty.Sprites.Refresher;
@@ -26,6 +27,7 @@ public class B2WorldCreator {
     private Array<Koopa> koopas;
     private Array<Refresher> refreshers;
     private Array<Checkpoint> checkpoints;
+    private Array<Holmer> holmers;
 
     public B2WorldCreator(PlayScreen screen, Player player) {
         World world = screen.getWorld();
@@ -124,12 +126,20 @@ public class B2WorldCreator {
             fdef.filter.categoryBits = CreatingBeauty.ABYSS_BIT;
             body.createFixture(fdef);
         }
+        if(map.getLayers().get(12) != null){
+            holmers = new Array<Holmer>();
+            for(MapObject object: map.getLayers().get(12).getObjects().getByType(RectangleMapObject.class)){
+                Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                holmers.add(new Holmer(screen, rect.getX() / CreatingBeauty.getPPM(), rect.getY() / CreatingBeauty.getPPM(), screen.holmerTexture));
+            }
+        }
     }
 
     public Array<Enemy> getEnemies(){
         Array<Enemy> enemies = new Array<Enemy>();
         enemies.addAll(goombas);
         enemies.addAll(koopas);
+        enemies.addAll(holmers);
         return enemies;
     }
     public Array<Refresher> getRefreshers(){

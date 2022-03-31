@@ -26,11 +26,12 @@ public class CreatingBeauty extends Game {
 	public static final short REFRESHER_BIT = 512;
 	public static final short TOP_BIT = 1024;
 	public static final short ABYSS_BIT = 2048;
+	public static final short HOLMER_BIT = 4096;
 
 	private SpriteBatch batch;
 
 	public static AssetManager manager;
-	public static int currentLevel = 3;
+	public static int currentLevel = 4;
 
 	@Override
 	public void create () {

@@ -96,6 +96,8 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
             case CreatingBeauty.PLAYER_BIT | CreatingBeauty.ABYSS_BIT:
+            case CreatingBeauty.PLAYER_BIT | CreatingBeauty.HOLMER_BIT:
+                System.out.println("pogf");
                 if (fixA.getFilterData().categoryBits == CreatingBeauty.PLAYER_BIT)
                     ((Player) fixA.getUserData()).die();
                 else
