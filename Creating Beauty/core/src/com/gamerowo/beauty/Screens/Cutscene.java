@@ -22,6 +22,7 @@ import com.gamerowo.beauty.CreatingBeauty;
 public class Cutscene implements Screen{
     private Viewport viewport;
     private Stage stage;
+    private OrthographicCamera cam;
 
     public static int photoIndex = 0;
 	public static Texture[] photos = {new Texture(Gdx.files.internal("CutscenePictures/DannyCryingInBed.jpg")),
@@ -41,7 +42,9 @@ public class Cutscene implements Screen{
 
     public Cutscene(Game game){
         this.game = game;
-        viewport = new FitViewport(CreatingBeauty.getWorldWidth(), CreatingBeauty.getWorldHeight(), new OrthographicCamera());
+        cam = new OrthographicCamera();
+        viewport = new FitViewport(CreatingBeauty.getWorldWidth(),
+                                        CreatingBeauty.getWorldHeight(), cam);
         stage = new Stage(viewport, ((CreatingBeauty) game).getBatch());
 
         /*Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
@@ -82,7 +85,8 @@ public class Cutscene implements Screen{
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(texsture, 0, 0, 1000, 750);
+        batch.setProjectionMatrix(cam.combined);
+        batch.draw(texsture, 0, 0, 40000 / CreatingBeauty.getPPM(), 22000 / CreatingBeauty.getPPM());
         batch.end();
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
             photoIndex++;
